@@ -1,0 +1,62 @@
+<% if "spree/products" == params[:controller] && @taxon || !@taxonomies.empty? %>
+  <% content_for :sidebar do %>
+    <div class="well">
+      <h5 style="margin-top: 0">More Parts Available</h5>
+      <p style="display: inline-block">We have thousands of parts in our shop. Can't find the part you need online?</p>
+      <%= link_to "Contact Us", "/contact", class: "btn btn-primary", style: "width: 100%" %>
+    </div>
+    <div class="mobile-collapse">
+      <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseFilter" aria-expanded="false" aria-controls="collapseExample" style="margin-bottom: 20px; width: 100%">
+        Filter Results
+      </a>
+      <div class="collapse" id="collapseFilter">
+        <div class="well">
+          <div data-hook="homepage_sidebar_navigation">
+              <%= render :partial => 'spree/shared/filters_general' %>
+              <%= render :partial => 'spree/shared/taxonomies' %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="desktop-collapse">
+      <div class="well">
+        <div data-hook="homepage_sidebar_navigation">
+            <%= render :partial => 'spree/shared/filters_general' %>
+            <%= render :partial => 'spree/shared/taxonomies' %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+<% end %>
+
+<% if params[:keywords] %>
+  <div data-hook="search_results">
+    <h2 class="search-results-title">Search Results for "<%= params[:keywords] %>"</h2>
+    <% if !@products["part_num"].nil? %>
+      <h3>Parts with Matching Part Number, Cast Number, or Cross Reference</h3>
+      <%= render :partial => 'spree/shared/products', :locals => { :products => @products["part_num"], :search_type => "part_num", :taxon => @taxon } %>
+    <% end %>
+    <% if !@products["base"].empty? %>
+      <h3>Search results</h3>
+      <%= render :partial => 'spree/shared/products', :locals => { :products => @products["base"], :search_type => "base", :taxon => @taxon } %>
+    <% else %>
+      <p>No general search results.</p>
+      <div class="well" style="margin-top: 20px">
+        <h5 style="margin-top: 0">Many More Parts Available!</h5>
+        <p style="display: inline-block">We have thousands of parts in our shop, and are adding more to our online database daily. Can't find the part you need online? Let us know what you're looking for; most likely we have it in stock.</p>
+        <%= link_to "Request Parts", "/contact", class: "btn btn-primary", style: "width: 100%" %>
+      </div>
+    <% end %>
+    <% if !@products["taxon"].nil? %>
+      <h3>Parts with Matching Taxons</h3>
+      <%= render :partial => 'spree/shared/products', :locals => { :products => @products["taxon"], :search_type => "taxon", :taxon => @taxon } %>
+    <% end %>
+  </div>
+<% else %>
+  <div data-hook="homepage_products">
+    <h2 class="search-results-title">All Products</h2>
+    <% # cache(cache_key_for_products) do %>
+      <%= render :partial => 'spree/shared/products', :locals => { :products => @products["base"], :search_type => "base", :taxon => @taxon } %>
+    <% # end %>
+  </div>
+<% end %>

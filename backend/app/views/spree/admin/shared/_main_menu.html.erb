@@ -1,0 +1,49 @@
+<!-- main menu for the mobile version so that when the admin user doesnt have a large enough screen to acheive the wanted -->
+
+<% if can? :admin, Spree::Order %>
+  <ul class="nav nav-sidebar">
+    <%= tab *Spree::BackendConfiguration::ORDER_TABS, icon: 'shopping-cart' %>
+  </ul>
+<% end %>
+
+<% if can? :admin, Spree::Product %>
+  <ul class="nav nav-sidebar">
+    <%= main_menu_tree Spree.t(:products), icon: "th-large", sub_menu: "product", url: "#sidebar-product" %>
+  </ul>
+<% end %>
+
+<% if can? :admin, Spree::Admin::ReportsController %>
+  <ul class="nav nav-sidebar">
+    <%= tab *Spree::BackendConfiguration::REPORT_TABS, icon: 'file'  %>
+  </ul>
+<% end %>
+
+<% if can? :admin, Spree::Promotion %>
+  <ul class="nav nav-sidebar">
+    <%= main_menu_tree Spree.t(:promotions), icon: "gift", sub_menu: "promotion", url: "#sidebar-promotions" %>
+  </ul>
+<% end %>
+
+<% if Spree.user_class && can?(:admin, Spree.user_class) %>
+  <ul class="nav nav-sidebar">
+    <%= main_menu_tree Spree.t(:users), icon: "user", sub_menu: "users", url: "#sidebar-users" %>
+  </ul>
+<% end %>
+
+<% if can? :admin, Customer %>
+  <ul class="nav nav-sidebar">
+    <%= main_menu_tree "Customers", icon: "user", sub_menu: "customers", url: "#sidebar-customers" %>
+  </ul>
+<% end %>
+
+<% if can? :admin, current_store %>
+  <ul class="nav nav-sidebar">
+    <%= main_menu_tree Spree.t(:configurations), icon: "wrench", sub_menu: "configuration", url: "#sidebar-configuration" %>
+  </ul>
+<% end %>
+
+<% if can? :admin, current_store %>
+  <ul class="nav nav-sidebar">
+    <%= main_menu_tree "Cars", icon: "heart", sub_menu: "cars", url: "#sidebar-cars" %>
+  </ul>
+<% end %>

@@ -1,0 +1,41 @@
+<div class="col-md-6">
+  <h2 class="taxon-title"><%= @taxon.name %></h2>
+</div>
+<div class="col-md-6" style="margin-top: 26px">
+  <% if !@taxon.children.empty? %>
+    <%= taxons_tree(@taxon.root, @taxon, 1, paramstring) %>
+  <% end %>
+</div>
+
+<% content_for :sidebar do %>
+  <div class="well">
+    <h5 style="margin-top: 0">More Parts Available</h5>
+    <p style="display: inline-block">We have thousands of parts in our shop. Can't find the part you need online?</p>
+    <%= link_to "Contact Us", "/contact", class: "btn btn-primary", style: "width: 100%" %>
+  </div>
+    <div class="mobile-collapse">
+      <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseFilter" aria-expanded="false" aria-controls="collapseExample" style="margin-bottom: 20px; width: 100%">
+        Filter Results
+      </a>
+<div class="collapse" id="collapseFilter">
+  <div class="well">
+    <div data-hook="taxon_sidebar_navigation">
+      <%= render :partial => 'spree/shared/filters_general' %>
+      <%= render :partial => 'spree/shared/taxonomies' %>
+    </div>
+  </div>
+      </div>
+    </div>
+    <div class="desktop-collapse">
+      <div class="well">
+        <div data-hook="homepage_sidebar_navigation">
+            <%= render :partial => 'spree/shared/filters_general' %>
+            <%= render :partial => 'spree/shared/taxonomies' %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+
+<div data-hook="taxon_products">
+  <%= render partial: 'spree/shared/products', locals: { products: @products["base"], taxon: @taxon } %>
+</div>

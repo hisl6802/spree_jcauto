@@ -1,0 +1,7 @@
+<!--Users tab in the side bar of the admin main page -->
+
+<ul data-hook="admin_configurations_sidebar_menu" class="collapse nav nav-pills nav-stacked" id="sidebar-users">
+  <%= tab *Spree::BackendConfiguration::USER_TABS, url: spree.admin_users_path %>
+  <%= tab :activities %>
+  <%= tab :quickbooks_activities %>
+</ul>

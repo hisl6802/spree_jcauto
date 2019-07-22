@@ -1,0 +1,74 @@
+<% unless @product_properties.empty? %> 
+  <div class="col-xs-12 col-sm-6 col-md-4"> 
+    <h3 class="product-section-title"><%= Spree.t('properties')%></h3>
+    <table id="product-properties" class="table table-striped" data-hook>
+        <thead>
+          <tr style="border-top: 1px solid #DDD">
+            <th class="mobile-left">Property</th>
+            <th class="mobile-left">Value</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @product_properties.each do |product_property| %>
+          <% css_class = cycle('even', 'odd', :name => "properties") %>
+          <tr class="<%= css_class %>">
+            <td class="mobile-left"><strong><%= product_property.property.presentation %></strong></td>
+            <td class="mobile-left">
+              <% if product_property.property.presentation == "Cross Reference" %>
+                <!-- Only show chrysler numbers -->
+                <% cross_found = false %>
+                <% product_property.value.split(",").each_with_index do |cross, index| %>
+                  <% if matches = cross.strip.match(/(\d{7})/) %>
+                      <%= ((index != 0 && cross_found) ? ", " : "") + matches[1] %> 
+                      <% cross_found = true %>
+                  <% end %>
+                <% end %>
+                <% if !cross_found %>
+                  N/A
+                <% end %>
+              <% else %>
+                <%= product_property.value %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        <% reset_cycle('properties') %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+
+<% unless @product_applications.empty? %>  
+  <div class="col-xs-12 col-sm-6 col-md-4">
+    <h3 class="product-section-title">Applications</h3>
+    <table id="product-properties" class="table table-striped" data-hook>
+      <thead>
+        <tr style="border-top: 1px solid #DDD">
+          <th class="mobile-left">Years</th>
+          <th class="mobile-left">Make</th>
+          <th class="mobile-left">Model/Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+          <% @product.product_applications.order('start_year asc').each do |product_application| %>
+            <% css_class = cycle('even', 'odd', :name => "properties") %>
+            <tr class="<%= css_class %>">
+              <td class="mobile-left"><%= product_application.range %></td>
+              <td class="mobile-left"><%= product_application.application && product_application.application.make ? product_application.application.make.name : "-" %></td>
+              <% notes = product_application.notes === "" ? "" : product_application.notes %>
+              <td class="mobile-left">
+                <%= product_application.application && product_application.application.model ? product_application.application.model.name + " " + notes : notes!="" ? notes : "-" %>
+              </td>
+            </tr>
+          <% end %>
+        <% reset_cycle('properties') %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+
+<div class="clearfix visible-xs visible-sm"></div>
+
+<div class="col-xs-12 col-sm-6 col-md-4">
+  <%= render :partial => 'taxons' %>
+</div>

@@ -1,0 +1,178 @@
+<% content_for :page_title do %>
+  <%= plural_resource_name(Spree::Product) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:new_product), new_object_url, { :class => "btn-success", :icon => 'add', :id => 'admin_new_product' } %>
+<% end if can?(:create, Spree::Product) %>
+
+<% content_for :table_filter do %>
+  <div data-hook="admin_products_sidebar">
+
+    <%= search_form_for [:admin, @search] do |f| %>
+      <%- locals = {:f => f} %>
+      <div data-hook="admin_products_index_search" class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= f.label :product_properties_value_cont, Spree.t(:part_or_cross_or_cast_number) %>
+            <%= f.text_field :product_properties_value_cont, :size => 15, class: "form-control" %>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= f.label :name_cont, Spree.t(:name) %>
+            <%= f.text_field :name_cont, :size => 15, class: "form-control" %>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= f.label :description_or_meta_keywords_cont, Spree.t(:description) %>
+            <%= f.text_field :description_or_meta_keywords_cont, :size => 15, class: "form-control js-quick-search-target" %>
+          </div>
+        </div>
+        <div class="col-md-4 navigation">
+          <label class="filter-title">Parts by Make</label>
+          <div class="form-group">
+            <%= f.collection_select :product_applications_application_make_id_eq, Spree::Make.all, :id, :name, {:include_blank => 'All'}, {class: "form-control"} %>
+          </div>
+        </div>
+        <% Spree::Make.all.each do |make| %>
+          <div class="col-md-4 navigation">
+            <label class="filter-title">Parts by Model for <%= make.name %></label>
+            <div class="form-group">
+              <%= f.collection_select :product_applications_application_model_id_eq, Spree::Model.where("make_id = ?", make.id), :id, :name, {:include_blank => 'All'}, {class: "form-control"} %>
+            </div>
+          </div>
+        <% end %>
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= f.label :product_applications_start_year_lteq, Spree.t(:year) %>
+            <%= f.collection_select :product_applications_start_year_lteq, (1924..Date.today.year).to_a.map { |m| [m, m] }, :first, :last, {:include_blank => 'All'}, { class: "form-control", id: "start-year" } %>
+          </div>
+        </div>
+        <div class="col-md-2" style="display: none">
+          <div class="form-group">
+            <%= f.label :product_applications_end_year_gteq, Spree.t(:end_year_range) %>
+            <%= f.collection_select :product_applications_end_year_gteq, (1924..Date.today.year).to_a.map { |m| [m, m] }, :first, :last, {:include_blank => 'All'}, {class: "form-control", id: "end-year"} %>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="field checkbox">
+            <label>
+              <%= f.check_box :deleted_at_null, {:checked => params[:q][:deleted_at_null] == '0'}, '0', '1' %>
+              <%= Spree.t(:show_deleted) %>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div data-hook="admin_products_index_search_buttons" class="form-actions">
+        <%= button Spree.t(:search), 'search' %>
+        <%= link_to Spree.t(:clear_filters), admin_products_path, class: "button-link", style: "margin-left: 10px" %>
+      </div>
+    <% end %>
+
+  </div>
+<% end %>
+
+<%= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @collection } %>
+
+<% if @collection.any? %>
+  <table class="table" id="listing_products">
+    <thead>
+      <tr data-hook="admin_products_index_headers">
+        <th><%= sort_link @search,:name, Spree.t(:name), { default_order: "desc" }, {title: 'admin_products_listing_name_title'} %></th>
+        <th>Information</th>
+        <th data-hook="admin_products_index_header_actions" class="actions"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @collection.each do |product| %>
+          <tr <%== "style='color: red;'" if product.deleted? %> id="<%= spree_dom_id product %>" data-hook="admin_products_index_rows" class="<%= cycle('odd', 'even') %>">
+            <td class="image"><%= mini_image product %><br><%= link_to product.try(:name), edit_admin_product_path(product) %></td>
+            <td class="mobile-left">
+              <% if product.description %>
+                <%= link_to edit_admin_product_path(product) do %><span style="font-weight: 700; margin-bottom: 0px; color: #200099"><%= product.description %></span><% end %><br>
+              <% else %>
+                N/A
+              <% end %>
+              <!-- Price -->
+              <% product.variants_and_option_values(current_currency).each_with_index do |variant, index| %>
+                  <!-- %= label_tag "variant_id_#{ variant.id }" do %-->
+                    <!-- span class="variant-description"-->
+                    <span style="font-weight: 700; margin-bottom: 0px; color: #bf210a">
+                      <% if variant_price variant %>
+                        <!--span class="price diff"-->
+                        <%= variant_price variant %>
+                      <% end %>
+                    </span>
+                    <% price_in_currency = variant.price_in(current_currency) %>
+                    <%= variant_options variant %><%= (variant.notes && variant.notes != "") ? " (" + variant.notes + ")" : "" %>
+                    <% unless variant.can_supply? %>
+                      <!--span class="out-of-stock"-->
+                      <span style="color: #bf210a"><%= Spree.t(:out_of_stock) %></span>
+                    <% end %>
+                  <!--% end %--><br>
+              <% end%>
+              <strong>Cross References:</strong> 
+              <% if !product.product_properties.where("property_id=?", 3).empty? %>
+                <%= product.property("Cross Reference") %>
+              <% else %>
+                N/A
+              <% end %><br>
+              <strong>Applications:</strong> 
+              <% if product.product_applications.empty? %> 
+                N/A
+              <% else %>
+                  <% len = product.product_applications.length %>
+                  <% product.product_applications.order('start_year asc').each_with_index do |product_application, index| %>
+                      <%= product_application.name.strip %><%= index+1 == len ? "" : ", " %>
+                  <% end %>
+              <% end %>
+            </td>
+            <td class="actions actions-3 text-right" data-hook="admin_products_index_row_actions">
+              <%= link_to_edit product, no_text: true, class: 'edit' if can?(:edit, product) && !product.deleted? %>
+              <%= link_to_clone product, no_text: true, class: 'clone' if can?(:clone, product) %>
+              <%= link_to_delete product, no_text: true if can?(:delete, product) && !product.deleted? %>
+            </td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::Product)) %>,
+    <%= link_to Spree.t(:add_one), new_object_url %>!
+  </div>
+<% end %>
+
+<%= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @collection } %>
+
+<script type="text/javascript">
+  $( document ).ready(function(){
+    check_models();
+  });
+
+  $("#q_product_applications_application_make_id_eq").change( function(){
+    check_models();
+  });
+
+  // change models available based on make selected
+  function check_models() {
+    $("select[name='q[product_applications_application_model_id_eq]']").each( function(){
+      var make_name = $("#q_product_applications_application_make_id_eq option:selected").text().split(" ");
+      var model_name = $(this).parent().siblings("label").html().split(" ");
+      if( model_name[4] == make_name[0] ) {
+        $(this).prop( "disabled", false );
+        $(this).parents(".navigation").show();
+      } else {
+        $(this).parents(".navigation").hide();
+        $(this).prop( "disabled", true );
+      }
+    });
+  }
+
+  $('#start-year').change( function() {
+    var year = $("#start-year option:selected").text();
+    $("#end-year").val(year);
+  });
+</script>

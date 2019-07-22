@@ -1,0 +1,189 @@
+<% 
+  filters = []
+
+  # filter makes
+  filters << Spree::Core::ProductFilters.by_make if Spree::Core::ProductFilters.respond_to?(:by_make) 
+
+  # filter models (according to make selected)
+  Spree::Make.all.each do |make|
+    filters << Spree::Core::ProductFilters.by_model(make.id) if Spree::Core::ProductFilters.respond_to?(:by_model)
+  end
+
+  # filter years
+  filters << Spree::Core::ProductFilters.by_year if Spree::Core::ProductFilters.respond_to?(:by_year) 
+
+  # filter by part group
+  # part_group_taxon = Spree::Taxon.where("name=?", "Part Groups").first
+  # filters << (Spree::Core::ProductFilters.taxons_under(part_group_taxon) if Spree::Core::ProductFilters.respond_to?(:taxons_under) && part_group_taxon)
+
+  # filter by keywords
+  filters << Spree::Core::ProductFilters.keyword_filter if Spree::Core::ProductFilters.respond_to?(:keyword_filter)
+
+  # filter by date added
+  filters << Spree::Core::ProductFilters.recent_filter if Spree::Core::ProductFilters.respond_to?(:keyword_filter)
+
+  # filter by price
+  filters << Spree::Core::ProductFilters.price_filter if Spree::Core::ProductFilters.respond_to?(:price_filter)
+%>
+
+<% unless filters.empty? %>
+  <%= form_tag '', :method => :get, :id => 'sidebar_products_search' do %>
+    <h3 style="margin-top: 0">Filter Results</h3>
+    <%= hidden_field_tag 'per_page', params[:per_page] %>
+
+    <!-- Loop through each filter -->
+    <% filters.each do |filter| %>
+      <% labels = filter[:labels] || filter[:conds].map {|m,c| [m,m]} %>
+      <% next if labels.empty? %>
+      <div class="navigation" data-hook="navigation">
+        <h5 class="filter-title" style="float: left"><%= filter[:name] %></h5>
+
+        <!-- Handle drop down for long lists -->
+        <% if filter[:name] != "Price Range" %>
+          <div class="clearfix"></div>
+          <% if filter[:name] == 'Parts by Keyword' %>
+            <% 
+              if params[:search] && params[:search][filter[:scope]]
+                  selected = params[:search][filter[:scope]]
+              end
+            %>
+            <% value = params[:keywords] ? params[:keywords] : (selected ? selected : "") %>
+            <% match = params[:match_exact] ? true : false %>
+            <div class="form-group inline">
+              <%= check_box_tag :match_exact, "1", match %><%= label_tag "match_exact", "Match exact search?", style: "margin-left: 10px; margin-top: -5px" %>
+              <%= text_field_tag "search[#{filter[:scope].to_s}]", value, {class: "form-control"} %>
+            </div>
+          <% elsif filter[:name] == 'Recently Added Parts' %>
+            <% collection = [] %>
+            <% selected = [] %>
+            <% labels.each do |nm,val| %>
+              <% label = val %>
+              <% component = [nm, label] %>
+              <% 
+                if params[:search] && params[:search][filter[:scope]] && params[:search][filter[:scope]].include?(val.to_s)
+                  selected = component
+                end
+               %>
+              <% collection << component %>
+            <% end %>
+            <div class="form-group">
+              <%= select_tag "search[#{filter[:scope].to_s}]", options_for_select(collection, selected), {prompt: "All", class: "form-control"} %>
+            </div>
+          <% else %>
+            <% collection = [] %>
+            <% selected = [] %>
+            <% labels.each do |nm,val| %>
+              <% label = val.to_i %>
+              <% component = [nm, label] %>
+              <% 
+                if params[:search] && params[:search][filter[:scope]] && params[:search][filter[:scope]] == (val.to_s)
+                  selected = component
+                end
+               %>
+              <% collection << component %>
+            <% end %>
+            <div class="form-group">
+              <%= select_tag "search[#{filter[:scope].to_s}]", options_for_select(collection, selected), {prompt: "All", class: "form-control"} %>
+            </div>
+          <% end %>
+        <% else %><!-- Price Range -->
+        <!-- Handle drop down for short lists -->
+          <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target=".collapse#priceCollapse" aria-expanded="false" aria-controls="priceCollapse" style="float: left; margin-left: 20px; margin-top: 10px">
+            show/hide
+          </button>
+          <div class="clearfix"></div>
+          <div class="collapse" id="priceCollapse">
+            <ul class="list-group"><!-- Otherwise use checkbox -->
+              <% labels.each do |nm,val| %>
+                <% label = "#{filter[:name]}_#{nm}".gsub(/\s+/,'_') %>
+                <li class="list-group-item">
+                  <input type="checkbox"
+                         id="<%= label %>"
+                         name="search[<%= filter[:scope].to_s %>][]"
+                         value="<%= val %>"
+                         <%= params[:search] && params[:search][filter[:scope]] && params[:search][filter[:scope]].include?(val.to_s) ? "checked" : "" %> />
+                  <label class="nowrap" for="<%= label %>"> <%= nm %> </label>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+      </div>
+    <% end %>
+    <%= submit_tag Spree.t(:filter), :name => nil, :class => 'btn btn-primary', style: "margin-top: 10px" %>
+    <%= link_to Spree.t(:clear), products_path, :class => 'btn btn-info', :id => 'reset', style: "margin-top: 10px" %>
+  <% end %>
+  <hr style="border-color: #777">
+<% end %>
+
+<script type="text/javascript">
+  $( document ).ready(function(){
+    check_models();
+  });
+
+  $(".desktop-collapse #search_product_applications_application_make_id_eq").change( function(){
+    check_models(true);
+  });
+
+  $(".mobile-collapse #search_product_applications_application_make_id_eq").change( function(){
+    check_models(false);
+  });
+
+  // Update mobile model if desktop changes
+  $(".desktop-collapse #search_product_applications_application_model_id_eq").change( function(){
+    model_id = $(".desktop-collapse #search_product_applications_application_model_id_eq").val()
+    $(".mobile-collapse #search_product_applications_application_model_id_eq").val(model_id);
+  });
+
+  // Update desktop model if mobile changes
+  $(".mobile-collapse #search_product_applications_application_model_id_eq").change( function(){
+    model_id = $(".mobile-collapse #search_product_applications_application_model_id_eq").val()
+    $(".desktop-collapse #search_product_applications_application_model_id_eq").val(model_id);
+  });
+
+  // change models available based on make selected
+  function check_models(desktop_change) {
+    var make_name
+    var make_id
+
+    if(desktop_change) {
+      make_name = $(".desktop-collapse #search_product_applications_application_make_id_eq option:selected").text().trim();//split(" ");
+      make_id = $(".desktop-collapse #search_product_applications_application_make_id_eq").val()
+      // Update value of mobile dropdown
+      $(".mobile-collapse #search_product_applications_application_make_id_eq").val(make_id);
+    } else {
+      make_name = $(".mobile-collapse #search_product_applications_application_make_id_eq option:selected").text().trim();//split(" ");
+      make_id = $(".mobile-collapse #search_product_applications_application_make_id_eq").val()
+      // Update value of desktop dropdown
+      $(".desktop-collapse #search_product_applications_application_make_id_eq").val(make_id);
+    }
+
+    // Update desktop dropdowns
+    $(".desktop-collapse select[name='search[product_applications_application_model_id_eq]']").each( function(){
+
+      var model_name = $(this).parent().siblings("h5").html().split(" ");
+      if( model_name[4] == make_name || model_name[4] + " " + model_name[5] == make_name ) {
+        $(this).prop( "disabled", false );
+        $(this).parents(".navigation").show();
+      } else {
+        $(this).parents(".navigation").hide();
+        $(this).prop( "disabled", true );
+      }
+    });
+
+    // Update mobile dropdowns
+    $(".mobile-collapse select[name='search[product_applications_application_model_id_eq]']").each( function(){
+    
+      var model_name = $(this).parent().siblings("h5").html().split(" ");
+      if( model_name[4] == make_name || model_name[4] + " " + model_name[5] == make_name) {
+        $(this).prop( "disabled", false );
+        $(this).parents(".navigation").show();
+      } else {
+        $(this).parents(".navigation").hide();
+        $(this).prop( "disabled", true );
+      }
+    });
+  }
+
+</script>

@@ -1,0 +1,55 @@
+/*------------------------------------------
+  Colors
+  -----------------------------------------*/
+  $brand-red: #bf210a;
+  $brand-red-dark: #8f1908;
+  $brand-red-med-light: #d97a6c;
+  $brand-red-light: #e5a69d;
+  $brand-red-very-light: #f2d3ce;
+
+  $brand-blue: #200099;
+  $brand-blue-dark: #180073;
+  $brand-blue-med-light: #7966c2;
+  $brand-blue-light: #a699d6;
+  $brand-blue-very-light: #d2cceb;
+
+  $brand-yellow: #ffe100;
+  $brand-yellow-dark: #bfa900;
+  $brand-yellow-med-light: #ffed66;
+  $brand-yellow-light: #fff399;
+  $brand-yellow-very-light: #fff9cc;
+
+  $brand-primary:         $brand-yellow; //darken(#e9c61a, 6.5%) !default
+  $brand-success:         $brand-yellow !default;
+  $brand-info:            $brand-blue !default;
+  $brand-warning:         $brand-red !default;
+  $brand-danger:          $brand-red-dark !default;
+
+  $input-border:  darken(#EDEDED, 5);
+
+/*------------------------------------------
+  Components
+  -----------------------------------------*/
+  $border-radius-base: 2px;
+  $padding-base-vertical: 8px;
+  $padding-base-horizontal: 16px;
+
+/*------------------------------------------
+  Fonts
+  -----------------------------------------*/
+  $headings-font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  $headings-font-weight: 300;
+
+/*------------------------------------------
+  Buttons
+  -----------------------------------------*/
+
+/*------------------------------------------
+  Navbar
+  -----------------------------------------*/
+  $navbar-inverse-bg: darken($brand-primary, 35);
+
+/*------------------------------------------
+  Wells
+  -----------------------------------------*/
+  $well-bg: #fbfbfb;

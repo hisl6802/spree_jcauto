@@ -1,0 +1,14 @@
+<!-- creates front end for the admin pages to ensure that the new resources can be created-->
+
+<% content_for :page_title do %>
+  <%= Spree.t(:new_application) %>
+<% end %>
+
+<%= form_for [:admin, @application] do |f| %>
+  <fieldset data-hook="new_property">
+    <%= render partial: 'form', locals: { f: f } %>
+    <div class="form-actions">
+      <%= render partial: 'spree/admin/shared/new_resource_links' %>
+    </div>
+  </fieldset>
+<% end %>

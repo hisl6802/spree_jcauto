@@ -1,0 +1,122 @@
+<%
+  paginated_products = @searcher.retrieve_products([], [])[search_type] if params.key?(:keywords)
+  # products.uniq!
+  paginated_products ||= products
+%>
+
+<% content_for :head do %>
+  <% if paginated_products.respond_to?(:num_pages) %>
+    <%= rel_next_prev_link_tags paginated_products %>
+  <% end %>
+<% end %>
+
+<div data-hook="products_search_results_heading">
+  <% if products.empty? %>
+    <div class="col-md-12" data-hook="products_search_results_heading_no_results_found">
+      <%= Spree.t(:no_products_found) %>
+      <div class="well" style="margin-top: 20px">
+        <h5 style="margin-top: 0">Many More Parts Available!</h5>
+        <p style="display: inline-block">We have thousands of parts in our shop, and are adding more to our online database daily. Can't find the part you need online? Let us know what you're looking for; most likely we have it in stock.</p>
+        <%= link_to "Request Parts", "/contact", class: "btn btn-primary", style: "width: 100%" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<% if products.any? %>
+  <!-- Test display -->
+  <table class="table table-hover">
+    <tr>
+      <th>Image</th>
+      <th>Info</th>
+      <% if spree_current_user && spree_current_user.admin? %>
+      <th>Active</th>
+      <% end %>
+    </tr>
+    <% products.each do |product| %>
+      <!-- Spree Setup -->
+      <% url = spree.product_url(product) %>
+      <% # url = spree.product_url(product, taxon_id: @taxon.try(:id)) %>
+      <% cache(@taxon.present? ? [I18n.locale, current_currency, @taxon, product] : [I18n.locale, current_currency, product]) do %>
+      <!-- End Spree Setup -->
+
+      <tr>
+        <!-- Image and part number -->
+        <td style="vertical-align: middle; text-align: center; max-width: 130px"><!-- Image -->
+          <% prod_image_large = product_image(product, itemprop: 'image') %>
+          <%= link_to small_image(product, itemprop: "image"), url, itemprop: 'url', role: "button", data: { toggle: "popover", trigger: "hover", content: "#{prod_image_large.html_safe}", html: true }, title: product.name, id: "popover-prod" %>
+          <h5><%= link_to product.name, url, itemprop: "name", title: product.property("Part Number") %></h5>
+        </td>
+        <!-- Information -->
+        <td class="mobile-left" style="vertical-align: middle">
+          <% if product.description %>
+            <p style="font-weight: 700; margin-bottom: 0px;"><%= link_to url do %><%= product.description %><% end %></p>
+          <% else %>
+            N/A
+          <% end %>
+          <!-- Price -->
+          <% product.variants_and_option_values(current_currency).each_with_index do |variant, index| %>
+              <!-- %= label_tag "variant_id_#{ variant.id }" do %-->
+                <!-- span class="variant-description"-->
+                <span style="font-weight: 700; margin-bottom: 0px; color: #bf210a">
+                  <% if variant_price variant %>
+                    <!--span class="price diff"-->
+                    <%= variant_price variant %>
+                  <% end %>
+                </span>
+                <% price_in_currency = variant.price_in(current_currency) %>
+                <%= variant_options variant %><%= (variant.notes && variant.notes != "") ? " (" + variant.notes + ")" : "" %>
+                <% unless variant.can_supply? %>
+                  <!--span class="out-of-stock"-->
+                  <span style="color: #bf210a"><%= Spree.t(:out_of_stock) %></span>
+                <% end %>
+              <!--% end %--><br>
+          <% end%>
+          <strong>Cross References:</strong>
+          <!-- Only show chrysler numbers -->
+          <% cross_found = false %>
+          <% if !product.product_properties.where("property_id=?", 3).empty? %>
+            <% product.property("Cross Reference").gsub(/;/,",").split(",").each_with_index do |cross, index| %>
+              <% if matches = cross.strip.match(/(\d{7})/) %>
+                  <%= ((index != 0 && cross_found) ? ", " : "") + matches[1] %>
+                  <% cross_found = true %>
+              <% end %>
+            <% end %>
+          <% end %>
+          <% if !cross_found %>
+            N/A
+          <% end %><br>
+          <strong>Applications:</strong>
+          <% if product.product_applications.empty? %>
+            N/A
+          <% else %>
+              <% len = product.product_applications.length %>
+              <% product.product_applications.order('start_year asc').each_with_index do |product_application, index| %>
+                  <%= product_application.name.strip %><%= index+1 == len ? "" : ", " %>
+              <% end %>
+          <% end %>
+        </td>
+
+        <% if spree_current_user && spree_current_user.admin? %>
+        <td>
+          <% if product.is_active && product.available? %>
+            true
+          <% else %>
+            false
+          <% end %>
+        </td>
+        <% end %>
+      </tr>
+      <% end %>
+    <% end %>
+  </table>
+<% end %>
+
+<% if paginated_products.respond_to?(:num_pages) %>
+  <%= paginate paginated_products, theme: 'twitter-bootstrap-3' %>
+<% end %>
+
+<script type="text/javascript">
+  $(function () {
+    $('[data-toggle="popover"]').popover()
+  })
+</script>

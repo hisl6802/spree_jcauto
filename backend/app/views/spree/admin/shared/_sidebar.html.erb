@@ -1,0 +1,6 @@
+<!-- This should just be calling the sidebar when it is needed to go along with other aspects of the current webpage -->
+<% if content_for?(:sidebar) %>
+  <aside id="sidebar" class="main-right-sidebar" data-hook>
+    <%= yield :sidebar %>
+  </aside>
+<% end %>

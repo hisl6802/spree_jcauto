@@ -1,0 +1,191 @@
+<% @body_id = 'product-details' %>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Image for <%= @product.name %></h3>
+      </div><!-- header -->
+      <div class="modal-body">
+        <div class="zoom-image-modal">
+          <%= render :partial => 'modalimage', :locals => { :image => @product.variant_images.first } %>
+        </div>
+      </div><!-- Modal body -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div><!-- Modal footer -->
+    </div><!-- Modal content -->
+  </div><!-- Modal dialog -->
+</div><!-- Modal fade -->
+
+<!-- Modal -->
+<div class="modal fade" id="conditionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Part Condition Information</h4>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Condition Name</th>
+              <th>Condition Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>NOS (New Old Stock)</td>
+              <td>A vintage original new part made by Chrysler or one of its suppliers</td>
+            </tr>
+            <tr>
+              <td>NORS (New Old Replacement Stock)</td>
+              <td>A replacement part that is now obsolete made by an American company</td>
+            </tr>
+            <tr>
+              <td>New</td>
+              <td>A part that is currently in production and made by an aftermarket company</td>
+            </tr>
+            <tr>
+              <td>Used</td>
+              <td>Any part that has been installed and used on a vehicle</td>
+            </tr>
+            <tr>
+              <td>Rebuilt</td>
+              <td>An original part that has been disassembled and rebuilt to its original function</td>
+            </tr>
+            <tr>
+              <td>Repro (Reproduction)</td>
+              <td>A reproduction of the part in its original design</td>
+            </tr>
+            <tr>
+              <td>Remolded</td>
+              <td>A rubber part that has been recast in a mold but retains the original metal core</td>
+            </tr>
+            <tr>
+              <td>Rechromed</td>
+              <td>An original part that has been aesthetically restored and rechromed by one of our vendors</td>
+            </tr>
+            <tr>
+              <td>Resleeved</td>
+              <td>A part that has been resleeved (for example a wheel cylinder or master cylinder with a new sleeve installed to restore the bore or a shift cable with a new jacket)</td>
+            </tr>
+            <tr>
+              <td>Core</td>
+              <td>A good rebuildable used original part</td>
+            </tr>
+            <tr>
+              <td>Restored</td>
+              <td>A part that has been cosmetically and functionally restored to its original new condition</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% cache [I18n.locale, current_currency, @product, @product.possible_promotions] do %>
+  <% lowest_taxon = @product.taxons.order("description desc").first %>
+  <ol class="breadcrumb">
+    <li><%= link_to products_path do %>Products<% end %></li>
+    <% lowest_taxon.ancestors.each do |taxon| %>
+      <li><%= link_to taxon.name, seo_url(taxon) %></li>
+    <% end %>
+    <li><%= link_to lowest_taxon.name, seo_url(lowest_taxon) %></li>
+    <li class="active"><%= @product.name %></li>
+  </ol>
+
+  <div data-hook="product_show" itemscope itemtype="https://schema.org/Product">
+    <div class="row" style="margin-top: 0; margin-bottom: 0; padding-bottom: 0; padding-top: 0">
+      <div class="col-md-12">
+        <h2 class="product-title" itemprop="name" style="margin-top: 0"><%= @product.name %>: <%= product_description(@product) rescue Spree.t(:product_has_no_description) %></h2>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-6" data-hook="product_left_part">
+        <div data-hook="product_left_part_wrap">
+          <div id="product-images" data-hook="product_images">
+            <a href="" data-toggle="modal" data-target="#myModal">
+              <div id="main-image" class="panel panel-default" data-hook>
+                <div class="panel-body text-center zoom-image" >
+                  <%= render :partial => 'image', :locals => { :image => @product.variant_images.first } %>
+                </div>
+              </div>
+            </a>
+            <div id="thumbnails" data-hook>
+              <%= render :partial => 'thumbnails' %>
+            </div>
+          </div><!-- Images -->
+        </div>
+      </div><!-- Left column -->
+      <!-- Right Column -->
+      <div class="col-xs-12 col-sm-6 col-md-6">
+        <div id="cart-form">
+          <%= render :partial => 'cart_form' %>
+        </div>
+        <div id="product-description" data-hook="product_description" style="margin-top: 20px">
+          <div data-hook="cart_form" style="margin-bottom: 10px">
+            <!-- Wishlist and email friend buttons -->
+          </div>
+        </div>
+        <div>
+          <% if @product.variant_images.first %>
+            <%= social_share_button_tag("Check out this part at JC Auto Restoration! Part Number " + @product.name, :image => @product.variant_images.first.attachment.url(:large), :desc => @product.description) %>
+          <% else %>
+            <%= social_share_button_tag("Check out this part at JC Auto Restoration! Part Number " + @product.name, :desc => @product.description) %>
+          <% end %>
+          <%= render :partial => 'promotions_short' %>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <!-- Properties and other information -->
+    <div class="row" style="margin-top: 0; margin-bottom: 0; padding-bottom: 0; padding-top: 0">
+
+      <div data-hook="product_properties">
+        <%= render :partial => 'properties' %>
+      </div>
+
+    </div>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    // Change zoom data on start
+    // $('div.zoom-image').children('img:not(".zoomImg")').first().data("large", $('.vtmb a').first().data("large"));
+
+    $('div.zoom-image-modal').zoom({ 
+      touch: false,
+      magnify: 1.2
+    });
+
+    /* $('div.zoom-image').mouseenter(function() {
+      $(this).children('img.zoomImg').first().attr("src", $(this).children('img:not(".zoomImg")').first().data("large"));
+      $(this).children('img:not(".zoomImg")').first().fadeTo("fast", 0);
+    });
+    $('div.zoom-image').mouseleave(function() {
+      $(this).children('img:not(".zoomImg")').first().fadeTo("fast", 1);
+    }); */
+    $('div.zoom-image-modal').mouseenter(function() {
+      $(this).children('img:not(".zoomImg")').first().fadeTo("fast", 0);
+    });
+    $('div.zoom-image-modal').mouseleave(function() {
+      $(this).children('img:not(".zoomImg")').first().fadeTo("fast", 1);
+    });
+
+    $('.vtmb a').click(function(){
+      var largePath = $(this).data("large");
+      // Change source for zoom image
+      // $('div.zoom-image').children('img:not(".zoomImg")').first().data("large", largePath);
+      // Change source for modal
+      $('#product-modal-image').attr("src", largePath);
+      $('div.zoom-image-modal').children('img.zoomImg').first().attr("src", largePath);
+    });
+  });
+</script>

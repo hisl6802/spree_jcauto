@@ -1,0 +1,26 @@
+<% max_level = Spree::Config[:max_level_in_taxons_menu] || 1 %>
+
+<nav id="taxonomies" class="sidebar-item" data-hook>
+	<h3>Find Parts</h3>
+		
+	<% @taxonomies.each do |taxonomy| %>
+		<% if taxonomy.name == "Part Groups" %>
+			<% # cache [I18n.locale, taxonomy, max_level, @taxon] do %>
+				<h5 class='taxonomy-root'><%= Spree.t(:shop_by_taxonomy, :taxonomy => taxonomy.name) %></h5>
+				<%= taxons_tree(taxonomy.root, taxonomy.root, max_level, paramstring) %>
+			<% # end %>
+		<% elsif taxonomy.name == "Packages and Assemblies" %>
+			<% # cache [I18n.locale, taxonomy, max_level, @taxon] do %>
+			<div style="margin-top: 20px">
+				<%= link_to(taxonomy.taxons.first.name, seo_url(taxonomy.taxons.first) + paramstring ) %>
+			</div>
+			<% # end %>
+		<% elsif taxonomy.name == "Featured Products" %>
+			<% # cache [I18n.locale, taxonomy, max_level, @taxon] do %>
+			<div style="margin-top: 20px">
+				<%= link_to(taxonomy.taxons.first.name, seo_url(taxonomy.taxons.first) + paramstring ) %>
+			</div>
+			<% # end %>
+		<% end %>
+	<% end %>
+</nav>
