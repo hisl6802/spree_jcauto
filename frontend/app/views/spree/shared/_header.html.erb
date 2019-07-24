@@ -18,7 +18,7 @@
               <% if spree_current_user %>
                 <% if spree_current_user && (spree_current_user.has_spree_role? "admin") %>
                 <!--Orginally the Admin Dashboarrd link sent to admin_path -->
-                  <li><%= link_to "Admin Dashboard", 'store/admin/general_settings/upload' %></li>
+                  <li><%= link_to "Admin Dashboard", admin_path %></li>
                 <% end %>
                 <li><%= link_to Spree.t(:my_account), spree.account_path %></li>
                 <li><%= link_to Spree.t(:my_cars), "/my-cars" %></li>

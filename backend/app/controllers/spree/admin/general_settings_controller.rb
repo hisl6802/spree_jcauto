@@ -47,27 +47,27 @@ module Spree
       # Upload excel document to populate database
       def upload_product_excel
 
-=begin
+        # begin
+        #   my_excel = Spree::Excel.new(params[:file])
+        # rescue Exception => e
+        #   flash[:error] = e.message
+        # end
 
-        begin
-          my_excel = Spree::Excel.new(params[:file])
-        rescue Exception => e
-          flash[:error] = e.message
-        end
-
-        if (my_excel)
-          my_excel.import_product_file()
-          @errors = my_excel.get_errors
-        end
-        if @errors && @errors.length > 0
-          flash[:error] = "Errors in upload, see table below"
-        end
-=end
+        # if (my_excel)
+        #   my_excel.import_product_file()
+        #   @errors = my_excel.get_errors
+        # end
+        # if @errors && @errors.length > 0
+        #   flash[:error] = "Errors in upload, see table below"
+        # end
  
         excel = Excel.create(name: 'test', parse_errors: nil, spreadsheet: params[:file])
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{excel.errors.full_messages}"
         ExcelWorker.perform_async(excel.id)
+        # if excel.save
+        #   flash[:success] = "Product(s) were added successfully"
+        # end
         render :action => :upload
       end
 
