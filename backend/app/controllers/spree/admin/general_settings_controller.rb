@@ -1,3 +1,4 @@
+
 module Spree
   module Admin
     class GeneralSettingsController < Spree::Admin::BaseController
@@ -46,6 +47,7 @@ module Spree
 
       # Upload excel document to populate database
       def upload_product_excel
+        require 'spreadsheet'
 
         # begin
         #   my_excel = Spree::Excel.new(params[:file])
@@ -60,20 +62,25 @@ module Spree
         # if @errors && @errors.length > 0
         #   flash[:error] = "Errors in upload, see table below"
         # end
- 
-        excel = Excel.create(name: 'test', parse_errors: nil, spreadsheet: params[:file])
+
+        @excel = Excel.create(name: 'test', parse_errors: nil, spreadsheet: params[:file])
+        Spreadsheet.client_encoding = 'UTF-8'
+        @excel_file = @excel.id
+        @excel_name = params[:file].original_filename
+        #I will add a call here for the reading of the spreadsheet row. Before
+        #that however I need to figure out how to find the path to the file.
         logger.info "********* File: #{params[:file]}"
-        logger.debug "********** Errors: #{excel.errors.full_messages}"
-        ExcelWorker.perform_async(excel.id)
-        # if excel.save
-        #   flash[:success] = "Product(s) were added successfully"
-        # end
+        logger.debug "********** Errors: #{@excel.errors.full_messages}"
+        ExcelWorker.perform_async(@excel.id)
+        if @excel.save
+           flash[:success] = @excel_name #"Product(s) were added successfully"
+        end
         render :action => :upload
       end
 
       # Upload excel document to populate database
       def upload_inventory_excel
-        begin
+        begin  
           my_excel = Spree::Excel.new(params[:file])
         rescue Exception => e
           flash[:error] = e.message
