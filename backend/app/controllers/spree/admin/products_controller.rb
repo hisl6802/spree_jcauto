@@ -1,7 +1,7 @@
 module Spree
   module Admin
     class ProductsController < ResourceController
-      #Are there any protections against the entering of identical parts that could cause issues when uploading and or searching for parts.
+      
 
       helper 'spree/products'
 
