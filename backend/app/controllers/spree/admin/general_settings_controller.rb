@@ -74,7 +74,7 @@ module Spree
 
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
-        open_part = Spreadsheet.open(@excel_path,'r')
+        #open_part = Spreadsheet.open(@excel_path,'r')
         #ExcelWorker.perform_async(@excel.id)
         if @excel.save
             #open_part = Spreadsheet.open(path,'r')
@@ -191,7 +191,7 @@ module Spree
            #  end
                   
 
-          flash[:success] = "Spreadsheet was successfully loaded."
+          flash[:success] = @excel_path #"Spreadsheet was successfully loaded."
            
         end
         #this render action should eventually send the admin user
