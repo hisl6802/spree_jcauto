@@ -190,7 +190,7 @@ module Spree
            #  end
                   
 
-          flash[:success] = @excel_name#"Spreadsheet was successfully loaded."
+          flash[:success] = @excel_file#"Spreadsheet was successfully loaded."
            
         end
         #this render action should eventually send the admin user
