@@ -69,7 +69,7 @@ module Spree
         #finds the folder in spreadsheets that it will be saved to.
         @excel_file = @excel.id
         @excel_file = @excel_file.to_s
-        @excel_path = @excel.key
+        #@excel_path = @excel.key
         @excel_name = params[:file].original_filename
 
         logger.info "********* File: #{params[:file]}"
@@ -191,7 +191,7 @@ module Spree
            #  end
                   
 
-          flash[:success] = @excel_path #"Spreadsheet was successfully loaded."
+          flash[:success] = "Spreadsheet was successfully loaded."
            
         end
         #this render action should eventually send the admin user
