@@ -70,10 +70,11 @@ module Spree
         @excel_file = @excel.id
         @excel_file = @excel_file.to_s
         @excel_name = params[:file].original_filename
-        #path = File.join Rails.root, 'public', 'spreadsheets', @excel_file, 'original', @excel_name
+        path = File.join Rails.root, 'spree', @excel_file, 'original', @excel_name
 
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
+        open_part = Spreadsheet.open(path,'r')
         #ExcelWorker.perform_async(@excel.id)
         if @excel.save
             #open_part = Spreadsheet.open(path,'r')
@@ -190,7 +191,7 @@ module Spree
            #  end
                   
 
-          flash[:success] = @excel_file#"Spreadsheet was successfully loaded."
+          flash[:success] = "Spreadsheet was successfully loaded."
            
         end
         #this render action should eventually send the admin user
