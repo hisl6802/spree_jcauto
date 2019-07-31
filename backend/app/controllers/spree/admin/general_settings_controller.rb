@@ -70,7 +70,7 @@ module Spree
         @excel_file = @excel.id
         @excel_file = @excel_file.to_s
         @excel_name = params[:file].original_filename
-        path = File.join Rails.root, 'spree', @excel_file, 'original', @excel_name
+        path = File.join, 'spree', @excel_file, @excel_name
 
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
