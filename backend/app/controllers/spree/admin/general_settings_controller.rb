@@ -30,7 +30,7 @@ module Spree
           render nothing: true
         end
       end
-      #clears the cache of any files which will slow down the website until the cache rebuilds itself.
+      #clears the cache of any files, which will slow down the website until the cache rebuilds itself.
       def clear_cache
         Rails.cache.clear
         invoke_callbacks(:clear_cache, :after)
@@ -74,7 +74,7 @@ module Spree
 
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
-        ExcelWorker.perform_async(@excel.id)
+        #ExcelWorker.perform_async(@excel.id)
         if @excel.save
            open_part = Spreadsheet.open(path,'r')
            part = open_part.worksheet(0)

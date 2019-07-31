@@ -2,6 +2,10 @@
 	class ExcelWorker
 		include Sidekiq::Worker
 		errors = []
+        
+        sidekiq_retries_exhausted do |msg, ex|
+        Sidekiq.logger.warn "Failed #{msg['class']} with #{msg['args']}: #{msg['error_message']}"
+        end
 
 		def perform(excel_id)
 			begin
