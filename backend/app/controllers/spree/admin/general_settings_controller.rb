@@ -74,7 +74,7 @@ module Spree
 
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
-        #open_part = Spreadsheet.open(path,'r')
+        open_part = Spreadsheet.open(path,'r')
 
         if @excel.save
             #open_part = Spreadsheet.open(path,'r')
