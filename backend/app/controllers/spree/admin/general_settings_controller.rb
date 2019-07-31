@@ -69,12 +69,12 @@ module Spree
         #finds the folder in spreadsheets that it will be saved to.
         @excel_file = @excel.id
         @excel_file = @excel_file.to_s
-        #@excel_path = @excel.key
         @excel_name = params[:file].original_filename
+        path = File.join 'spree', @excel_file, 'original', @excel_name
 
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
-        #open_part = Spreadsheet.open(@excel_path,'r')
+        #open_part = Spreadsheet.open(path,'r')
         #ExcelWorker.perform_async(@excel.id)
         if @excel.save
             #open_part = Spreadsheet.open(path,'r')
@@ -191,7 +191,7 @@ module Spree
            #  end
                   
 
-          flash[:success] = "Spreadsheet was successfully loaded."
+          flash[:success] = path#{}"Spreadsheet was successfully loaded."
            
         end
         #this render action should eventually send the admin user
