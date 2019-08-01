@@ -59,12 +59,13 @@ module Spree
         @excel_name = params[:file].original_filename
 
         #path = File.join, 'spree','excels', @excel_file, 'original', @excel_name
-        path = 'spree/' + 'excels/' + @excel_file + '/' + 'original/' + @excel_name
-        type = path.class
+        
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
-        ExcelWorker.perform_async(@excel.id)
+        #ExcelWorker.perform_async(@excel.id)
         if @excel.save
+            path = 'spree/' + 'excels/' + @excel_file + '/' + 'original/' + @excel_name
+            type = path.class
             xlsx = Roo::Spreadsheet.open(path, 'r')
             #open_part = Spreadsheet.open(path, 'r')
             #part = open_part.worksheet(0)
