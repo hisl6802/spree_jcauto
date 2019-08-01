@@ -181,6 +181,7 @@ module Spree
                   
 
           flash[:success] = "Spreadsheet was successfully loaded and opened."
+          flash[:success] = type
            
         end
         #this render action should eventually send the admin user to the products creation page.
