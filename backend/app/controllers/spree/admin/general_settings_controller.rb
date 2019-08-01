@@ -63,7 +63,7 @@ module Spree
         type = path.class
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
-
+        ExcelWorker.perform_async(@excel.id)
         if @excel.save
             xlsx = Roo::Spreadsheet.open(path, 'r')
             #open_part = Spreadsheet.open(path, 'r')
