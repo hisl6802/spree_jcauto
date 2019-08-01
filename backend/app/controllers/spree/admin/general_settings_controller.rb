@@ -76,8 +76,8 @@ module Spree
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
 
         if @excel.save
-            open_part = Spreadsheet.open path
-            #part = open_part.worksheet(0)
+            open_part = Spreadsheet.open(path)
+            part = open_part.worksheet(0)
            #skip the first column of each row.
            #part_row = part.row(1)
            #part_size = part.count
@@ -193,7 +193,7 @@ module Spree
           flash[:success] = "Spreadsheet was successfully loaded."
            
         end
-        #this render action should eventually send the admin user
+        #this render action should eventually send the admin user to the products creation page.
         render :action => :upload
       end
 
