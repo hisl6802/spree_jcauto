@@ -74,10 +74,9 @@ module Spree
 
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
-         #open_part = Spreadsheet.open(path,'r')
 
         if @excel.save
-            #open_part = Spreadsheet.open(path,'r')
+            open_part = Spreadsheet.open(path,'r')
             #part = open_part.worksheet(0)
            #skip the first column of each row.
            #part_row = part.row(1)
