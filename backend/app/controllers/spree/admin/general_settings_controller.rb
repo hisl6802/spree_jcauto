@@ -58,7 +58,8 @@ module Spree
         @excel_file = @excel_file.to_s
         @excel_name = params[:file].original_filename
 
-        path = File.join, 'spree','excels', @excel_file, 'original', @excel_name
+        #path = File.join, 'spree','excels', @excel_file, 'original', @excel_name
+        path = 'spree/' + 'excels/' + @excel_file + '/' + 'original/' + @excel_name
         type = path.class
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
