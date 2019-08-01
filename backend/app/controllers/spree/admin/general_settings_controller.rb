@@ -48,7 +48,6 @@ module Spree
       # Upload excel document to populate database
       def upload_product_excel
         require 'spreadsheet'
-        require 'roo-xls'
         require 'roo'
 
         @excel = Excel.create(name: 'test', parse_errors: nil, spreadsheet: params[:file])
