@@ -59,7 +59,7 @@ module Spree
         @excel_name = params[:file].original_filename
 
         path = File.join, 'spree','excels', @excel_file, 'original', @excel_name
-
+        type = path.class
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
 
@@ -179,7 +179,7 @@ module Spree
            #  end
                   
 
-          flash[:success] = excel_file # "Spreadsheet was successfully loaded."
+          flash[:success] = type # "Spreadsheet was successfully loaded."
            
         end
         #this render action should eventually send the admin user to the products creation page.
