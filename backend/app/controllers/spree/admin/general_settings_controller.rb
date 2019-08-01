@@ -64,9 +64,10 @@ module Spree
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
         #ExcelWorker.perform_async(@excel.id)
         if @excel.save
-            path = 'spree/' + 'excels/' + @excel_file + '/' + 'original/' + @excel_name
-            type = path.class
-            #xlsx = Roo::Excelx.new(('spree/'+'excels/' + @excel_file + '/' + 'original/' + @excel_name))
+            
+            #path = 'spree/' + 'excels/' + @excel_file + '/' + 'original/' + @excel_name
+            #type = path.class
+            xlsx = Roo::Excelx.new(('spree/'+'excels/' + @excel_file + '/' + 'original/' + @excel_name))
             #open_part = Spreadsheet.open(path, 'r')
             #part = open_part.worksheet(0)
            #skip the first column of each row.
