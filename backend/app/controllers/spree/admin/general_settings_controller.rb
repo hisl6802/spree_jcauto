@@ -65,7 +65,7 @@ module Spree
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
 
         if @excel.save
-            #xlsx = Roo::Spreadsheet.open(path, 'r')
+            xlsx = Roo::Spreadsheet.open(path, 'r')
             #open_part = Spreadsheet.open(path)
             #part = open_part.worksheet(0)
            #skip the first column of each row.
