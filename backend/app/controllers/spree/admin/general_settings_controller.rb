@@ -64,9 +64,7 @@ module Spree
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
 
         if @excel.save
-            xlsx = Roo::Spreadsheet.open(path)
-            sheets = ods.sheets
-            ods.sheet(0).row(1)
+            #xlsx = Roo::Spreadsheet.open(path, 'r')
             #open_part = Spreadsheet.open(path)
             #part = open_part.worksheet(0)
            #skip the first column of each row.
@@ -181,7 +179,7 @@ module Spree
            #  end
                   
 
-          flash[:success] = sheets # "Spreadsheet was successfully loaded."
+          flash[:success] = excel_file # "Spreadsheet was successfully loaded."
            
         end
         #this render action should eventually send the admin user to the products creation page.
