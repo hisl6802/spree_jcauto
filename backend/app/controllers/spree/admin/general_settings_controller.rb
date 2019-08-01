@@ -48,20 +48,8 @@ module Spree
       # Upload excel document to populate database
       def upload_product_excel
         require 'spreadsheet'
-
-        # begin
-        #   my_excel = Spree::Excel.new(params[:file])
-        # rescue Exception => e
-        #   flash[:error] = e.message
-        # end
-
-        # if (my_excel)
-        #   my_excel.import_product_file()
-        #   @errors = my_excel.get_errors
-        # end
-        # if @errors && @errors.length > 0
-        #   flash[:error] = "Errors in upload, see table below"
-        # end
+        require 'roo-xls'
+        require 'roo'
 
         @excel = Excel.create(name: 'test', parse_errors: nil, spreadsheet: params[:file])
         Spreadsheet.client_encoding = 'UTF-8'
@@ -70,14 +58,17 @@ module Spree
         @excel_file = @excel.id
         @excel_file = @excel_file.to_s
         @excel_name = params[:file].original_filename
+
         path = File.join, 'spree','excels', @excel_file, 'original', @excel_name
 
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
 
         if @excel.save
-            open_part = Spreadsheet.open(path)
-            part = open_part.worksheet(0)
+            xlsx = Roo::Spreadsheet.open(path)
+            sheets = ods.sheets
+            #open_part = Spreadsheet.open(path)
+            #part = open_part.worksheet(0)
            #skip the first column of each row.
            #part_row = part.row(1)
            #part_size = part.count
@@ -190,7 +181,7 @@ module Spree
            #  end
                   
 
-          flash[:success] = "Spreadsheet was successfully loaded."
+          flash[:success] = sheets # "Spreadsheet was successfully loaded."
            
         end
         #this render action should eventually send the admin user to the products creation page.
