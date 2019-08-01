@@ -66,6 +66,7 @@ module Spree
         if @excel.save
             xlsx = Roo::Spreadsheet.open(path)
             sheets = ods.sheets
+            ods.sheet(0).row(1)
             #open_part = Spreadsheet.open(path)
             #part = open_part.worksheet(0)
            #skip the first column of each row.
