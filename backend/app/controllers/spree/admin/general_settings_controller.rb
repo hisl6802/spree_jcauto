@@ -49,7 +49,7 @@ module Spree
       def upload_product_excel
         require 'spreadsheet'
         require 'roo'
-
+        require 'aws-sdk'
         @excel = Excel.new(name: 'Excel_upload', parse_errors: nil, spreadsheet: params[:file])
 
         #finds the folder in spreadsheets that it will be saved to.
