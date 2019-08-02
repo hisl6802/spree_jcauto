@@ -64,7 +64,7 @@ module Spree
         if @excel.save
 
 
-          @url = @excel.url
+          
             # if @excel.exists?
             #   flash[:success] = "File Exists"
             # else
@@ -187,7 +187,7 @@ module Spree
                   
 
           #flash[:success] = "Spreadsheet was successfully loaded and opened."
-          flash[:success] = @url
+          flash[:success] = @excel
            
         end
         #this render action should eventually send the admin user to the products creation page.
