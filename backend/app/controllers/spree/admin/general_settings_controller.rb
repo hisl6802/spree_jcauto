@@ -64,7 +64,7 @@ module Spree
         #workbook = RubyXL::Parser.parse(File.join('/spree','excels',@excel_file,'original',@excel_name))
 
         #@path = Excel.find(params[:file])
-        if excel.save
+        if @excel.save
             #xlsx = Roo::Excelx.new(File.join(Rails.root,'public','spree','excels',@excel_file,'original',@excel_name))
 
             #open_part = Spreadsheet.open(path, 'r')
