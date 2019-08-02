@@ -57,7 +57,7 @@ module Spree
         @excel_file = @excel.id
         @excel_file = @excel_file.to_s
         @excel_name = params[:file].original_filename
-        @tmp_file = params[:file].temp_file
+        @tmp_file = params[:file].tempfile
 
         #path = File.join, 'spree','excels', @excel_file, 'original', @excel_name
         
