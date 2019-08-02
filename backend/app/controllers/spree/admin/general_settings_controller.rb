@@ -65,7 +65,7 @@ module Spree
 
         if @excel.save
             
-            #xlsx = Roo::Excelx.new('/tmp/RackMultipart20190802-14-1y20mg4.xlsx')#File.join('public','spreadsheets',@excel_file,'original',@excel_name))
+            xlsx = Roo::Excelx.new(File.join(Rails.root,'public','system','spree','excels',@excel_file,'original',@excel_name)
 
             #open_part = Spreadsheet.open(path, 'r')
             #part = open_part.worksheet(0)
