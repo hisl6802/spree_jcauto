@@ -61,6 +61,9 @@ module Spree
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
 
+        workbook = RubyXL::Parser.parse(File.join('/spree','excels',@excel_name,'original',@excel_name)
+
+
         if @excel.save
 
 
