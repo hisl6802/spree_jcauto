@@ -62,7 +62,7 @@ module Spree
         
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
-        #ExcelWorker.perform_async(@excel.id)
+
         if @excel.save
             
             #xlsx = Roo::Excelx.new('/tmp/RackMultipart20190802-14-1y20mg4.xlsx')#File.join('public','spreadsheets',@excel_file,'original',@excel_name))
