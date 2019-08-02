@@ -51,7 +51,7 @@ module Spree
         require 'roo'
 
         @excel = Excel.create(name: 'Excel_upload', parse_errors: nil, spreadsheet: params[:file])
-        Spreadsheet.client_encoding = 'UTF-8'
+        #Spreadsheet.client_encoding = 'UTF-8'
 
         #finds the folder in spreadsheets that it will be saved to.
         @excel_file = @excel.id
