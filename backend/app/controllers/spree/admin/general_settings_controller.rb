@@ -50,7 +50,7 @@ module Spree
         require 'spreadsheet'
         require 'roo'
 
-        @excel = Excel.create(name: 'Excel_upload', parse_errors: nil, spreadsheet: params[:file])
+        @excel = Excel.new(name: 'Excel_upload', parse_errors: nil, spreadsheet: params[:file])
 
         #finds the folder in spreadsheets that it will be saved to.
         @excel_file = @excel.id
@@ -63,17 +63,8 @@ module Spree
 
         #workbook = RubyXL::Parser.parse(File.join('/spree','excels',@excel_file,'original',@excel_name))
 
-        @path = Excel.find(params[:file])
-
-        if @excel.save
-
-
-          
-            # if @excel.exists?
-            #   flash[:success] = "File Exists"
-            # else
-            #   flash[:success] = "Cannot Find file"
-            # end
+        #@path = Excel.find(params[:file])
+        if excel.save
             #xlsx = Roo::Excelx.new(File.join(Rails.root,'public','spree','excels',@excel_file,'original',@excel_name))
 
             #open_part = Spreadsheet.open(path, 'r')
@@ -190,10 +181,9 @@ module Spree
            #  end
                   
 
-          #flash[:success] = "Spreadsheet was successfully loaded and opened."
-          flash[:success] = @path
-           
-        end
+        flash[:success] = "Spreadsheet was successfully loaded and opened."
+        #flash[:success] = @path
+      end
         #this render action should eventually send the admin user to the products creation page.
         render :action => :upload
       end
