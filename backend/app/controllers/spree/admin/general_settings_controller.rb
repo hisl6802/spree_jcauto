@@ -184,7 +184,7 @@ module Spree
                   
 
           #flash[:success] = "Spreadsheet was successfully loaded and opened."
-          flash[:success] = @excel_name
+          flash[:success] = @tmp_file
            
         end
         #this render action should eventually send the admin user to the products creation page.
