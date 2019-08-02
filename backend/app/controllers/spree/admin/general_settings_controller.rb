@@ -50,13 +50,14 @@ module Spree
         require 'spreadsheet'
         require 'roo'
 
-        @excel = Excel.create(name: 'test', parse_errors: nil, spreadsheet: params[:file])
+        @excel = Excel.create(name: 'Excel_upload', parse_errors: nil, spreadsheet: params[:file])
         Spreadsheet.client_encoding = 'UTF-8'
 
         #finds the folder in spreadsheets that it will be saved to.
         @excel_file = @excel.id
         @excel_file = @excel_file.to_s
         @excel_name = params[:file].original_filename
+        @tmp_file = paramas[:file].temp_file
 
         #path = File.join, 'spree','excels', @excel_file, 'original', @excel_name
         
@@ -65,10 +66,9 @@ module Spree
         #ExcelWorker.perform_async(@excel.id)
         if @excel.save
             
-            #path = 'spree/' + 'excels/' + @excel_file + '/' + 'original/' + @excel_name
-            #type = path.class
-            
-            xlsx = Roo::Excelx.new('/tmp/RackMultipart20190802-14-1y20mg4.xlsx')#File.join('public','spreadsheets',@excel_file,'original',@excel_name))
+            #xlsx = Roo::Excelx.new('/tmp/RackMultipart20190802-14-1y20mg4.xlsx')#File.join('public','spreadsheets',@excel_file,'original',@excel_name))
+            #/tmp/RackMultipart20190802-15-1vhcbrg.xlsx
+
             #open_part = Spreadsheet.open(path, 'r')
             #part = open_part.worksheet(0)
            #skip the first column of each row.
