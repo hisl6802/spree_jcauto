@@ -55,8 +55,8 @@ module Spree
         #finds the folder in spreadsheets that it will be saved to.
         @excel_file = @excel.id
         @excel_file = @excel_file.to_s
-        @excel_name = params[:file].original_filename
-        @tmp_file = params[:file].tempfile.to_s
+        @excel_name = params[:file].original_filename.to_s
+        #@tmp_file = params[:file].tempfile.to_s
 
         #path = File.join, 'spree','excels', @excel_file, 'original', @excel_name
         
@@ -66,7 +66,6 @@ module Spree
         if @excel.save
             
             #xlsx = Roo::Excelx.new('/tmp/RackMultipart20190802-14-1y20mg4.xlsx')#File.join('public','spreadsheets',@excel_file,'original',@excel_name))
-            #/tmp/RackMultipart20190802-15-1vhcbrg.xlsx
 
             #open_part = Spreadsheet.open(path, 'r')
             #part = open_part.worksheet(0)
@@ -183,7 +182,7 @@ module Spree
                   
 
           #flash[:success] = "Spreadsheet was successfully loaded and opened."
-          flash[:success] = @tmp_file
+          flash[:success] = @excel_name
            
         end
         #this render action should eventually send the admin user to the products creation page.
