@@ -64,8 +64,12 @@ module Spree
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
 
         if @excel.save
-            
-            xlsx = Roo::Excelx.new(File.join(Rails.root,'public','spree','excels',@excel_file,'original',@excel_name))
+            if @excel.exists?
+              flash[:success] = "File Exists"
+            else
+              flash[:success] = "Cannot Find file"
+            end
+            #xlsx = Roo::Excelx.new(File.join(Rails.root,'public','spree','excels',@excel_file,'original',@excel_name))
 
             #open_part = Spreadsheet.open(path, 'r')
             #part = open_part.worksheet(0)
