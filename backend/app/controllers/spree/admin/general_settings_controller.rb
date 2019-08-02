@@ -63,6 +63,7 @@ module Spree
 
         #workbook = RubyXL::Parser.parse(File.join('/spree','excels',@excel_file,'original',@excel_name))
 
+        @path = Excel.find(params[:file])
 
         if @excel.save
 
@@ -190,7 +191,7 @@ module Spree
                   
 
           #flash[:success] = "Spreadsheet was successfully loaded and opened."
-          flash[:success] = @excel
+          flash[:success] = @path
            
         end
         #this render action should eventually send the admin user to the products creation page.
