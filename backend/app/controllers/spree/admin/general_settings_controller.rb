@@ -57,18 +57,19 @@ module Spree
         @excel_file = @excel_file.to_s
         @excel_name = params[:file].original_filename.to_s
         @tmp_file = params[:file].tempfile.to_s
-
-        #path = File.join, 'spree','excels', @excel_file, 'original', @excel_name
         
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
 
         if @excel.save
-            if @excel.exists?
-              flash[:success] = "File Exists"
-            else
-              flash[:success] = "Cannot Find file"
-            end
+
+
+          @url = @excel.url
+            # if @excel.exists?
+            #   flash[:success] = "File Exists"
+            # else
+            #   flash[:success] = "Cannot Find file"
+            # end
             #xlsx = Roo::Excelx.new(File.join(Rails.root,'public','spree','excels',@excel_file,'original',@excel_name))
 
             #open_part = Spreadsheet.open(path, 'r')
@@ -186,7 +187,7 @@ module Spree
                   
 
           #flash[:success] = "Spreadsheet was successfully loaded and opened."
-          flash[:success] = @excel_name
+          flash[:success] = @url
            
         end
         #this render action should eventually send the admin user to the products creation page.
