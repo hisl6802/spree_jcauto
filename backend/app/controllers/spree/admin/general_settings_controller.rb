@@ -67,11 +67,11 @@ module Spree
         #@path = Excel.find(params[:file])
         if @excel.save
             #xlsx = Roo::Excelx.new(File.join(Rails.root,'public','spree','excels',@excel_file,'original',@excel_name))
-            s3 = Aws::S3::Resource.new(region: 'us-west-2')
+            s3 = AWS::S3::Resource.new(region: 'us-west-2')
 
             spr_sheet = s3.bucket['jcauto'].objects[@excel_name]
 
-            
+
             #open_part = Spreadsheet.open(path, 'r')
             #part = open_part.worksheet(0)
            #skip the first column of each row.
