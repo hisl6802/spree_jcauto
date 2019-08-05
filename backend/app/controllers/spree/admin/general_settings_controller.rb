@@ -71,7 +71,7 @@ module Spree
 
             spr_sheet = s3.buckets['jcauto'].objects[@excel_name]
 
-            spr_sheet_file = spr_sheet.gets(response_target: '/spree/excels/product.xls')
+            spr_sheet_file = spr_sheet.get_object(response_target: '/spree/excels/product.xls')
 
             #open_part = Spreadsheet.open(path, 'r')
             #part = open_part.worksheet(0)
