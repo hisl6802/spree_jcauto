@@ -70,7 +70,7 @@ module Spree
             s3 = AWS::S3.new(region: 'us-west-2')
 
             spr_sheet = s3.buckets['jcauto'].objects[@excel_name]
-
+            obj = Spreadsheet.open(params[:file].tempfile.path)
             # File.open('Product.txt', 'wb') do |file|
             #   spr_sheet.read do |chunk|
             #     file.write(chunk)
