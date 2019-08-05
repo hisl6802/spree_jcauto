@@ -72,7 +72,7 @@ module Spree
             @spr_sheet = s3.buckets['jcauto'].objects[@excel_name]
 
             #File.open(@excel_name, 'r') do |file|
-            spr_sheet.read
+            @spr_sheet.read
             #end  
 
 
