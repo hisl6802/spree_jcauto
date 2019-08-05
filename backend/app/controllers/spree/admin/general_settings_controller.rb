@@ -72,7 +72,7 @@ module Spree
             @spr_sheet = s3.buckets['jcauto'].objects[@excel_name]
 
             #File.open(@excel_name, 'r') do |file|
-            @spr_sheet.read
+            #@spr_sheet.read
             #end  
 
 
@@ -192,7 +192,7 @@ module Spree
            #  end
                   
 
-        flash[:success] = "Spreadsheet was successfully loaded and opened."
+        flash[:success] = @spr_sheet #"Spreadsheet was successfully loaded and opened."
         #flash[:success] = @path
       end
         #this render action should eventually send the admin user to the products creation page.
