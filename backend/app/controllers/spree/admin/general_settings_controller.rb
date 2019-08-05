@@ -71,11 +71,9 @@ module Spree
 
             @spr_sheet = s3.buckets['jcauto'].objects[@excel_name]
 
-            File.open(@spr_sheet, 'wb') do |file|
-              spr_sheet.read do |chunck|
-                file.write(chunk)
-              end
-            end  
+            #File.open(@excel_name, 'r') do |file|
+            spr_sheet.read
+            #end  
 
 
             #spr_sheet_file = spr_sheet.get_object(response_target: '/spree/excels/product.xls')
