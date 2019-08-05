@@ -61,7 +61,7 @@ module Spree
         
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
-
+        path = params[:file].tempfile.path
         #workbook = RubyXL::Parser.parse(File.join('/spree','excels',@excel_file,'original',@excel_name))
 
         #@path = Excel.find(params[:file])
@@ -194,7 +194,7 @@ module Spree
            #  end
                   
 
-        flash[:success] = spr_sheet #"Spreadsheet was successfully loaded and opened."
+        flash[:success] = path #"Spreadsheet was successfully loaded and opened."
         #flash[:success] = @path
       end
         #this render action should eventually send the admin user to the products creation page.
