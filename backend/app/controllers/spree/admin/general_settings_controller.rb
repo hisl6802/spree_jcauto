@@ -69,9 +69,9 @@ module Spree
             #xlsx = Roo::Excelx.new(File.join(Rails.root,'public','spree','excels',@excel_file,'original',@excel_name))
             s3 = AWS::S3.new(region: 'us-west-2')
 
-            spr_sheet = s3.buckets['jcauto'].objects[@excel_name]
+            @spr_sheet = s3.buckets['jcauto'].objects[@excel_name]
 
-            File.open(@excel_name, 'wb') do |file|
+            File.open(spr_sheet, 'wb') do |file|
               spr_sheet.read do |chunck|
                 file.write(chunk)
               end
