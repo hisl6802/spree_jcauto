@@ -69,10 +69,12 @@ module Spree
             #xlsx = Roo::Excelx.new(File.join(Rails.root,'public','spree','excels',@excel_file,'original',@excel_name))
             s3 = AWS::S3.new(region: 'us-west-2')
 
-            @spr_sheet = s3.buckets['jcauto'].objects[@excel_name]
+            spr_sheet = s3.buckets['jcauto'].objects[@excel_name]
 
             File.open('Product.txt', 'wb') do |file|
-              @spr_sheet.read
+              spr_sheet.read do |chunk|
+                file.write(chunk)
+              end
             end  
 
 
@@ -192,7 +194,7 @@ module Spree
            #  end
                   
 
-        flash[:success] = @spr_sheet #"Spreadsheet was successfully loaded and opened."
+        flash[:success] = spr_sheet #"Spreadsheet was successfully loaded and opened."
         #flash[:success] = @path
       end
         #this render action should eventually send the admin user to the products creation page.
