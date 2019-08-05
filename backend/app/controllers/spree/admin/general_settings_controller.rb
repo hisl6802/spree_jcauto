@@ -67,11 +67,18 @@ module Spree
         #@path = Excel.find(params[:file])
         if @excel.save
             #xlsx = Roo::Excelx.new(File.join(Rails.root,'public','spree','excels',@excel_file,'original',@excel_name))
-            s3 = AWS::S3
+            s3 = AWS::S3.new(region: 'us-west-2')
 
             spr_sheet = s3.buckets['jcauto'].objects[@excel_name]
 
-            spr_sheet_file = spr_sheet.get_object(response_target: '/spree/excels/product.xls')
+            File.open(@excel_name, 'wb') do |file|
+              spr_sheet.read do |chunck|
+                file.write(chunk)
+              end
+            end  
+
+
+            #spr_sheet_file = spr_sheet.get_object(response_target: '/spree/excels/product.xls')
 
             #open_part = Spreadsheet.open(path, 'r')
             #part = open_part.worksheet(0)
