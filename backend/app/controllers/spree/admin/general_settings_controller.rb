@@ -69,7 +69,7 @@ module Spree
             #xlsx = Roo::Excelx.new(File.join(Rails.root,'public','spree','excels',@excel_file,'original',@excel_name))
             s3 = AWS::S3.new(region: 'us-west-2')
 
-            spr_sheet = s3.bucket['jcauto'].objects[@excel_name]
+            spr_sheet = s3.buckets['jcauto'].objects[@excel_name]
 
 
             #open_part = Spreadsheet.open(path, 'r')
