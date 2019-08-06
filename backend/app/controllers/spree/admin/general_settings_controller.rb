@@ -165,13 +165,14 @@ module Spree
               quant = quant[23].to_s
               
               @product = Product.create(name: part_name,description: descrip)
+              redirect_to admin_product_path(@product)
               #@product.master.price = price
-              if @product.save
-                #flash[:success] = "Product successfully saved"
-                redirect_to edit_admin_product_url(@product)
-              else
-                flash[:success] = "Product didn't save"
-              end
+              # if @product.save
+              #   #flash[:success] = "Product successfully saved"
+              #   redirect_to edit_admin_product_url(@product)
+              # else
+              #   flash[:success] = "Product didn't save"
+              # end
 
             end
 
@@ -187,7 +188,7 @@ module Spree
         #flash[:success] = @product.name#{}"Spreadsheet was successfully loaded and opened."
       end
         #this render action should eventually send the admin user to the products creation page.
-        render :action => :upload
+        #render :action => :upload
       end
 
       # Upload excel document to populate database
