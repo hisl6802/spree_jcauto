@@ -165,7 +165,7 @@ module Spree
               
               @product = Product.create(name: part_name,description: descrip)
               #@product.save
-              redirect_to edit_admin_product_url(@product)
+              redirect_to edit_admin_product_url(@product.id)
 
             end
 
