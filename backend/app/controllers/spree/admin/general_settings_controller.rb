@@ -61,129 +61,112 @@ module Spree
         
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
-        path = params[:file].tempfile.path
-        #workbook = RubyXL::Parser.parse(File.join('/spree','excels',@excel_file,'original',@excel_name))
 
-        #@path = Excel.find(params[:file])
         if @excel.save
-            #xlsx = Roo::Excelx.new(File.join(Rails.root,'public','spree','excels',@excel_file,'original',@excel_name))
-            s3 = AWS::S3.new(region: 'us-west-2')
-
-            spr_sheet = s3.buckets['jcauto'].objects[@excel_name]
             obj = Spreadsheet.open(params[:file].tempfile.path)
-            # File.open('Product.txt', 'wb') do |file|
-            #   spr_sheet.read do |chunk|
-            #     file.write(chunk)
-            #   end
-            # end  
-
-
-            #spr_sheet_file = spr_sheet.get_object(response_target: '/spree/excels/product.xls')
-
-            #open_part = Spreadsheet.open(path, 'r')
-            #part = open_part.worksheet(0)
+            part = open_part.worksheet(0)
            #skip the first column of each row.
-           #part_row = part.row(1)
-           #part_size = part.count
-           #if part_size <= 2
+           part_row = part.row(1)
+           part_size = part.count
+           if part_size <= 2
               #pulls out the name which is the part number of the product
-              #part_row = part.row(1)
-              #part_name = part_row[0].to_int.to_s
+              part_row = part.row(1)
+              part_name = part_row[0].to_int.to_s
 
               #pulls out the category from the product sheet
-              #category = part.row(1)
-              #category = category[1].to_s
+              category = part.row(1)
+              category = category[1].to_s
 
               #pulls out the Description from the product sheet
-              #descrip = part.row(1)
-              #descrip = descrip[2].to_s
+              descrip = part.row(1)
+              descrip = descrip[2].to_s
 
               #pulls out the Item Tax Code
-              #item_tax_code = part.row(1)
-              #item_tax_code = item_tax_code[3]#what is this column numbers and letters? Just Numbers
+              item_tax_code = part.row(1)
+              item_tax_code = item_tax_code[3]#what is this column numbers and letters? Just Numbers
 
               #pulls out the Unit Price of the item
-              #price = part.row(1)
-              #price = price[4].to_s
+              price = part.row(1)
+              price = price[4].to_s
 
               #pulls out the Last purchase cost
-              #last_purch = part.row(1)
-              #last_purch = last_purch[5].to_s
+              last_purch = part.row(1)
+              last_purch = last_purch[5].to_s
 
               #pulls out the product length (in)
-              #length = part.row(1)
-              #length = length[6].to_s
+              length = part.row(1)
+              length = length[6].to_s
 
               #pulls out the product width (in)
-              #width = part.row(1)
-              #width = width[7].to_s
+              width = part.row(1)
+              width = width[7].to_s
 
               #pulls out the product height (in)
-              #height = part.row(1)
-              #height = height[8].to_s
+              height = part.row(1)
+              height = height[8].to_s
 
               #pulls out the product weight
-              #weight = part.row(1)
-              #weight = weight[9].to_s
+              weight = part.row(1)
+              weight = weight[9].to_s
 
               #Remarks
-              #remarks = part.row(1)
-              #remarks = remarks[10]
+              remarks = part.row(1)
+              remarks = remarks[10]
 
               #application
-              #application = part.row(1)
-              #application = application[11].to_s
+              application = part.row(1)
+              application = application[11].to_s
 
               #Location
-              #location = part.row(1)
-              #location = location[12].to_s
+              location = part.row(1)
+              location = location[12].to_s
 
               #Condition 
-              #condition = part.row(1)
-              #condition = condition[13].to_s
+              condition = part.row(1)
+              condition = condition[13].to_s
 
               #Cross Reference
-              #cross_ref = part.row(1)
-              #cross_ref = cross_ref[14].to_s
+              cross_ref = part.row(1)
+              cross_ref = cross_ref[14].to_s
 
               #Casting number
-              #cast_num = part.row(1)
-              #cast_num = cast_num[15].to_s
+              cast_num = part.row(1)
+              cast_num = cast_num[15].to_s
 
               #Core Charge
-              #core_charge = part.row(1)
-              #core_charge = core_charge[16].to_s
+              core_charge = part.row(1)
+              core_charge = core_charge[16].to_s
 
               #For sale (date in which it is for sale)
-              #sale = part.row(1)
-              #sale = sale[17].to_s
+              sale = part.row(1)
+              sale = sale[17].to_s
 
               #Online store
-              #online_store = part.row(1)
-              #online_store = online_store[18].to_s
+              online_store = part.row(1)
+              online_store = online_store[18].to_s
 
               #IsActive
-              #active = part.row(1)
-              #active = active[19].to_s
+              active = part.row(1)
+              active = active[19].to_s
 
               #Item
-              #item = part.row(1)
-              #item = item[20].to_s
+              item = part.row(1)
+              item = item[20].to_s
 
               #location
-              #loc = part.row(1)
-              #loc = loc[21].to_s
+              loc = part.row(1)
+              loc = loc[21].to_s
 
               #Sublocation
-              #sub_loc = part.row(1)
-              #sub_loc = sub_loc[22].to_s
+              sub_loc = part.row(1)
+              sub_loc = sub_loc[22].to_s
 
               #Quantity
-              #quant = part.row(1)
-              #quant = quant[23].to_s
+              quant = part.row(1)
+              quant = quant[23].to_s
 
 
-              #end
+            end
 
 
            # part.each do |row|
@@ -194,8 +177,7 @@ module Spree
            #  end
                   
 
-        flash[:success] = path #"Spreadsheet was successfully loaded and opened."
-        #flash[:success] = @path
+        flash[:success] = "Spreadsheet was successfully loaded and opened."
       end
         #this render action should eventually send the admin user to the products creation page.
         render :action => :upload
