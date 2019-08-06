@@ -51,11 +51,6 @@ module Spree
         require 'spreadsheet'
 
         @excel = Excel.new(name: 'Excel_upload', parse_errors: nil, spreadsheet: params[:file])
-        #finds the folder in spreadsheets that it will be saved to.
-        @excel_file = @excel.id
-        @excel_file = @excel_file.to_s
-        @excel_name = params[:file].original_filename.to_s
-        @tmp_file = params[:file].tempfile.to_s
         
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
