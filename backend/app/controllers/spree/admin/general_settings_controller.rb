@@ -164,6 +164,7 @@ module Spree
               quant = quant[23].to_s
               
               @product = Product.create(name: part_name,description: descrip)
+              @product.master.price = price
               if @product.save
                 flash[:sucess] = "Product successfully saved"
                 #redirect_to edit_admin_product_url(@product)
