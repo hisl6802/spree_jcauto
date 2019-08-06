@@ -162,7 +162,7 @@ module Spree
               #Quantity
               quant = part.row(1)
               quant = quant[23].to_s
-              redirect_to new_admin_product_url(@excel)
+              redirect_to new_admin_product_url
 
             end
 
