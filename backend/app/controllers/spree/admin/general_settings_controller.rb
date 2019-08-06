@@ -1,11 +1,10 @@
-
 module Spree
   module Admin
     class GeneralSettingsController < Spree::Admin::BaseController
       include Spree::Backend::Callbacks
       
       helper 'spree/products'
-      
+
       before_action :set_store
 
       def edit
@@ -165,7 +164,7 @@ module Spree
               quant = part.row(1)
               quant = quant[23].to_s
               
-              @product = Product.create(name: part_name,description: descrip,price: price)
+              @product = Product.create(name: part_name,description: descrip)
               #@product.master.price = price
               if @product.save
                 #flash[:success] = "Product successfully saved"
