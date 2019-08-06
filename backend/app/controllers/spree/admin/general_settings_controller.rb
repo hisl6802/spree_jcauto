@@ -164,8 +164,8 @@ module Spree
               quant = quant[23].to_s
               
               @product = Product.new(name: part_name,description: descrip)
-              @id = @product.id.to_s
-              #redirect_to new_admin_product_url
+              @product.save
+              redirect_to edit_admin_product_url(@product)
 
             end
 
