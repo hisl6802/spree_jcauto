@@ -163,7 +163,7 @@ module Spree
               quant = part.row(1)
               quant = quant[23].to_s
               
-              @product = Product.new(name: part_name,sku: part_name,master_price: price, avaliable_on: active)
+              @product = Product.new(name: part_name,description: descrip)
               
               redirect_to new_admin_product_url(@excel.id)
 
