@@ -3,7 +3,9 @@ module Spree
   module Admin
     class GeneralSettingsController < Spree::Admin::BaseController
       include Spree::Backend::Callbacks
-
+      
+      helper 'spree/products'
+      
       before_action :set_store
 
       def edit
@@ -166,8 +168,8 @@ module Spree
               @product = Product.create(name: part_name,description: descrip,price: price)
               #@product.master.price = price
               if @product.save
-                flash[:success] = "Product successfully saved"
-                #redirect_to edit_admin_product_url(@product)
+                #flash[:success] = "Product successfully saved"
+                redirect_to edit_admin_product_url(@product)
               else
                 flash[:success] = "Product didn't save"
               end
