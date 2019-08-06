@@ -166,8 +166,10 @@ module Spree
               @product = Product.create(name: part_name,description: descrip)
               @product.master.price = price
               if @product.save
-                flash[:sucess] = "Product successfully saved"
+                flash[:success] = "Product successfully saved"
                 #redirect_to edit_admin_product_url(@product)
+              else
+                flash[:success] = "Product didn't save"
               end
 
             end
@@ -181,7 +183,7 @@ module Spree
            #  end
                   
 
-        flash[:success] = @product.name#{}"Spreadsheet was successfully loaded and opened."
+        #flash[:success] = @product.name#{}"Spreadsheet was successfully loaded and opened."
       end
         #this render action should eventually send the admin user to the products creation page.
         render :action => :upload
