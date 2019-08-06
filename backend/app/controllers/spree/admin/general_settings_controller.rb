@@ -165,14 +165,14 @@ module Spree
               quant = quant[23].to_s
               
               @product = Product.create(name: part_name,description: descrip)
-              redirect_to admin_product_path(@product)
-              #@product.master.price = price
-              # if @product.save
-              #   #flash[:success] = "Product successfully saved"
-              #   redirect_to edit_admin_product_url(@product)
-              # else
-              #   flash[:success] = "Product didn't save"
-              # end
+              #redirect_to admin_product_path(@product)
+              @product.master.price = price
+              if @product.save
+                #flash[:success] = "Product successfully saved"
+                redirect_to edit_admin_product_url(@product)
+              else
+                flash[:success] = "Product didn't save"
+              end
 
             end
 
