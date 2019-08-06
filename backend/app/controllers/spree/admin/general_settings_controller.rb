@@ -188,7 +188,7 @@ module Spree
         #flash[:success] = @product.name#{}"Spreadsheet was successfully loaded and opened."
       end
         #this render action should eventually send the admin user to the products creation page.
-        #render :action => :upload
+        render :action => :upload
       end
 
       # Upload excel document to populate database
