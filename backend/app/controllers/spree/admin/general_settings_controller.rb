@@ -163,8 +163,8 @@ module Spree
               quant = part.row(1)
               quant = quant[23].to_s
               
-              @product = Product.create(name: part_name,description: descrip)
-              @product.master.price = price
+              @product = Product.create(name: part_name,description: descrip,price: price)
+              #@product.master.price = price
               if @product.save
                 flash[:success] = "Product successfully saved"
                 #redirect_to edit_admin_product_url(@product)
