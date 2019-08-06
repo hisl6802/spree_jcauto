@@ -159,7 +159,7 @@ module Spree
               quant = part.row(1)
               quant = quant[23].to_s
               
-              @product = Product.create(name: part_name,description: descrip)
+              @product = Product.new(name: part_name,description: descrip)
               #redirect_to admin_product_path(@product)
               @product.master.price = price
               if @product.save
