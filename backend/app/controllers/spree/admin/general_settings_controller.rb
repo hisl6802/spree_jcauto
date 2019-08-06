@@ -70,7 +70,7 @@ module Spree
            if part_size <= 2
               #pulls out the name which is the part number of the product
               @part_row = part.row(1)
-              part_name = @part_row[0].to_int.to_s
+              @part_name = @part_row[0].to_int.to_s
 
               #pulls out the category from the product sheet
               @category = part.row(1)
@@ -163,6 +163,7 @@ module Spree
               #Quantity
               @quant = part.row(1)
               @quant = @quant[23].to_s
+              
               redirect_to new_admin_product_url(@excel.id)
 
             end
