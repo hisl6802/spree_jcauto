@@ -165,7 +165,7 @@ module Spree
               
               @product = Product.new(name: part_name,description: descrip)
               
-              redirect_to new_admin_product_url(@excel.id)
+              redirect_to new_admin_product_url
 
             end
 
