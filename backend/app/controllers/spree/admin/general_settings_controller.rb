@@ -163,8 +163,8 @@ module Spree
               quant = part.row(1)
               quant = quant[23].to_s
               
-              @product = Product.new(name: part_name,description: descrip)
-              @product.save
+              @product = Product.create(name: part_name,description: descrip)
+              #@product.save
               redirect_to edit_admin_product_url(@product)
 
             end
