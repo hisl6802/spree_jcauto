@@ -2,7 +2,6 @@ module Spree
   module Admin
     class GeneralSettingsController < Spree::Admin::BaseController
       include Spree::Backend::Callbacks
-      include Spree::Admin::Products
       
       helper 'spree/products'
 
