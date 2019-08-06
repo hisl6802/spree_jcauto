@@ -181,7 +181,7 @@ module Spree
            #  end
                   
 
-        flash[:success] = @product.master.price#{}"Spreadsheet was successfully loaded and opened."
+        flash[:success] = @product.name#{}"Spreadsheet was successfully loaded and opened."
       end
         #this render action should eventually send the admin user to the products creation page.
         render :action => :upload
