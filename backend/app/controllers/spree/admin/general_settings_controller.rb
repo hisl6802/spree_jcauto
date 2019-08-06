@@ -165,7 +165,7 @@ module Spree
               
               @product = Product.new(name: part_name,description: descrip)
               @id = @product.id
-              redirect_to new_admin_product_url
+              #redirect_to new_admin_product_url
 
             end
 
@@ -181,7 +181,7 @@ module Spree
         flash[:success] = @id#{}"Spreadsheet was successfully loaded and opened."
       end
         #this render action should eventually send the admin user to the products creation page.
-        #render :action => :upload
+        render :action => :upload
       end
 
       # Upload excel document to populate database
