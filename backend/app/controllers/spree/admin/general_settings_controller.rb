@@ -55,9 +55,9 @@ module Spree
         
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
-
+        open_part = Spreadsheet.open(params[:file].tempfile.path)
         if @excel.save
-            open_part = Spreadsheet.open(params[:file].tempfile.path)
+            
             part = open_part.worksheet(0)
            
            #skip the first column of each row.
@@ -160,15 +160,16 @@ module Spree
               quant = part.row(1)
               quant = quant[23].to_s
               
-              @product = Product.new(name: part_name,description: descrip)
-              #redirect_to admin_product_path(@product)
-              @product.master.price = price
-              if @product.save
-                #flash[:success] = "Product successfully saved"
-                redirect_to edit_admin_product_url(@product)
-              else
-                flash[:success] = "Product didn't save"
-              end
+              # @product = Product.new(name: part_name,description: descrip)
+              # #redirect_to admin_product_path(@product)
+              # @product.master.price = price
+              # if @product.save
+              #   #flash[:success] = "Product successfully saved"
+              #   redirect_to edit_admin_product_url(@product)
+              # else
+              #   flash[:success] = "Product didn't save"
+              # end
+              redirect_to admin_general_settings
 
             end
 
