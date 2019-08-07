@@ -7,6 +7,9 @@ module Spree
 
       before_action :set_store
 
+      def index
+      end
+      
       def edit
         @preferences_security = [:check_for_spree_alerts]
       end
