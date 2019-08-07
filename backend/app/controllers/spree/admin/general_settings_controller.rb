@@ -169,7 +169,7 @@ module Spree
               # else
               #   flash[:success] = "Product didn't save"
               # end
-              redirect_to admin_general_settings
+              redirect_to admin_general_settings_url
 
             end
 
