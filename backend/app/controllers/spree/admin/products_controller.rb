@@ -15,6 +15,10 @@ module Spree
         redirect_to action: :edit
       end
 
+      def upload_products_excel
+        require 'spreadsheet'
+      end
+
       def index
         session[:return_to] = request.url
         respond_with(@collection)
