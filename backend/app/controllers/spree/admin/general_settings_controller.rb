@@ -74,7 +74,7 @@ module Spree
 
               #pulls out the Description from the product sheet
               #(needs to be a string and will have to work to ensure this works when putting into a text format)
-              description = part_row[2].to_s
+              @excel.description = part_row[2].to_s
 
               #pulls out the Item Tax Code
               #(Not sure on this one need to figure out)
@@ -82,11 +82,11 @@ module Spree
 
               #pulls out the Unit Price of the item
               #(needs to be a decimal)
-              price = part_row[4].to_s
+              @excel.price = part_row[4]
 
               #pulls out the Last purchase cost
               #(needs to be a decimal)
-              lastpurchasecost = part_row[5].to_s
+              @excel.lastpurchasecost = part_row[5]
 
               #pulls out the product length (in)
               #(needs to be a decimal)
