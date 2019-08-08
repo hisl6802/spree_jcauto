@@ -66,7 +66,6 @@ module Spree
 
               #pulls out the name which is the part number of the product
               #(needs to be a string)
-              part_row = part.row(1)
               part_num = part_row[0].to_int.to_s
 
               #pulls out the category from the product sheet
@@ -108,7 +107,7 @@ module Spree
               #Remarks
               #(needs to be a string)
               #In my opinion this needs to be removed from the table
-              remarks = part_row[10]
+              remarks = part_row[10].to_s
 
               #application
               #(needs to be a string)
@@ -128,7 +127,10 @@ module Spree
 
               #Casting number
               #(needs to be an integer)
-              cast_num = part_row[15].to_int
+              cast_num = part_row[15]
+              unless cast_num.nil?
+                cast_num = cast_num.to_int
+              end
 
               #Core Charge
               #(needs to be a decimal)
@@ -162,6 +164,9 @@ module Spree
               #Quantity
               #(needs to be an integer)
               quant = part_row[23].to_int
+              unless quant.nil?
+                quant = quant.to_int
+              end
               
               # @product = Product.new(name: part_name,description: descrip)
               # #redirect_to admin_product_path(@product)
@@ -173,7 +178,7 @@ module Spree
               #   flash[:success] = "Product didn't save"
               # end
               redirect_to admin_general_settings_url
-              flash[:success] = category
+              flash[:success] = @excel
           end
            # part.each do |row|
            #    #grab each name based upon the location of the data.
