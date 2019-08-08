@@ -17,7 +17,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<%= form_for [:admin, @excels], :html => { :multipart => true } do |f| %>
+					<%= form_for [:admin, @excel], :html => { :multipart => true } do |f| %>
   					<fieldset data-hook="new_product">
     					<%= f.field_container :name, :class => ['form-group'] do %>
       					<%= f.label :name, Spree.t(:name) %> <span class="required">*</span>
