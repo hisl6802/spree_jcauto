@@ -62,17 +62,7 @@ module Spree
         #skip the first column of each row.
         part_row = part.row(1)
         part_size = part.count
-        
-        if @excel.save
-            
-          # part = open_part.worksheet(0)
-           
-          #  #skip the first column of each row.
-          #  part_row = part.row(1)
-          #  part_size = part.count
-
-          
-           if part_size <= 2
+        if part_size <= 2
               #pulls out the name which is the part number of the product
               part_row = part.row(1)
               part_name = part_row[0].to_int.to_s
@@ -179,21 +169,15 @@ module Spree
               #   flash[:success] = "Product didn't save"
               # end
               redirect_to admin_general_settings_url
+              flash[:success] =@excel.name #"Spreadsheet sucessfully parsed."
 
-            end
-
-
+          end
            # part.each do |row|
            #    #grab each name based upon the location of the data.
            #    part_name = part[0]
            #    part_name = part_name.to_int
            #    part_name = part_name.to_s
            #  end
-                  
-
-        #flash[:success] = @product.name#{}"Spreadsheet was successfully loaded and opened."
-      end
-        #this render action should eventually send the admin user to the products creation page.
         #render :action => :upload
       end
 
