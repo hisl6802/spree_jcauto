@@ -86,23 +86,23 @@ module Spree
 
               #pulls out the Last purchase cost
               #(needs to be a decimal)
-              @excel.lastpurchasecost = part_row[5]
+              @excel.LastPurchasecost = part_row[5]
 
               #pulls out the product length (in)
               #(needs to be a decimal)
-              length = part_row[6].to_s
+              @excel.Productlength = part_row[6]
 
               #pulls out the product width (in)
               #(needs to be a decimal)
-              width = part_row[7].to_s
+              @excel.Productwidth = part_row[7].to_s
 
               #pulls out the product height (in)
               #(needs to be a decimal)
-              height = part_row[8].to_s
+              @excel.Productheight = part_row[8].to_s
 
               #pulls out the product weight
               #(needs to be a decimal)
-              weight = part_row[9].to_s
+              @excel.Productweight = part_row[9].to_s
 
               #Remarks
               #(needs to be a string)
@@ -111,11 +111,11 @@ module Spree
 
               #application
               #(needs to be a string)
-              application = part_row[11].to_s
+              @excel.Application = part_row[11].to_s
 
               #Location
               #(needs to be a string)
-              location = part_row[12].to_s
+              @excel.Location = part_row[12].to_s
 
               #Condition 
               #(needs to be a string)
@@ -123,31 +123,31 @@ module Spree
 
               #Cross Reference
               #(needs to be a string)
-              cross_ref = part_row[14].to_s
+              @excel.CrossReference = part_row[14].to_s
 
               #Casting number
               #(needs to be an integer)
-              cast_num = part_row[15]
-              unless cast_num.nil?
-                cast_num = cast_num.to_int
+              @excel.CastingNum = part_row[15]
+              unless @excel.CastingNum.nil?
+                @excel.CastingNum = @excel.CastingNum.to_int
               end
 
               #Core Charge
               #(needs to be a decimal)
-              core_charge = part_row[16].to_s
+              @excel.CoreCharge = part_row[16]
 
               #For sale (date in which it is for sale)
               #(needs to be a string)
-              for_sale = part_row[17].to_s
+              @excel.ForSale = part_row[17].to_s
 
               #Online store
               #(needs to be a string for now)
               #I may request this to be removed it seems to be redundant at this point
-              online_store = part_row[18].to_s
+              @excel.OnlineStore = part_row[18].to_s
 
               #IsActive
               #(needs to be a string for now)
-              active = part_row[19].to_s
+              @excel.IsActive = part_row[19].to_s
 
               #Item
               #I believe I would like this to be removed
@@ -159,13 +159,13 @@ module Spree
 
               #Sublocation
               #(needs to be a string)
-              sub_loc = part_row[22].to_s
+              @excel.Sublocation= part_row[22].to_s
 
               #Quantity
               #(needs to be an integer)
-              quant = part_row[23].to_int
-              unless quant.nil?
-                quant = quant.to_int
+              @excel.Quantity = part_row[23].to_int
+              unless @excel.Quantity.nil?
+                @excel.Quantity = @excel.Quantity.to_int
               end
               
               # @product = Product.new(name: part_name,description: descrip)
