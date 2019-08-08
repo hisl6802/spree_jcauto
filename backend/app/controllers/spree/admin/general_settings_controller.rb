@@ -63,13 +63,15 @@ module Spree
         part_row = part.row(1)
         part_size = part.count
         if part_size <= 2
+
               #pulls out the name which is the part number of the product
+              #(needs to be a string)
               part_row = part.row(1)
-              part_name = part_row[0].to_int.to_s
+              part_num = part_row[0].to_int.to_s
 
               #pulls out the category from the product sheet
               category = part.row(1)
-              category = category[1].to_s
+              category = part_row[1].to_s
 
               #pulls out the Description from the product sheet
               descrip = part.row(1)
@@ -169,8 +171,7 @@ module Spree
               #   flash[:success] = "Product didn't save"
               # end
               redirect_to admin_general_settings_url
-              flash[:success] =@excel.name #"Spreadsheet sucessfully parsed."
-
+              flash[:success] = category
           end
            # part.each do |row|
            #    #grab each name based upon the location of the data.
