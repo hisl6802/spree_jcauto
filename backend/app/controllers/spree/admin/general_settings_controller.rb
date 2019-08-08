@@ -66,7 +66,7 @@ module Spree
 
               #pulls out the name which is the part number of the product
               #(needs to be a string)
-              part_num = part_row[0].to_int.to_s
+              @excel.part_num = part_row[0].to_int.to_s
 
               #pulls out the category from the product sheet
               #(needs to be a string given the dash in the category)
@@ -178,7 +178,7 @@ module Spree
               #   flash[:success] = "Product didn't save"
               # end
               redirect_to admin_general_settings_url
-              flash[:success] = @excel.type
+              flash[:success] = @excel
           end
            # part.each do |row|
            #    #grab each name based upon the location of the data.
