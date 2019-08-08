@@ -26,9 +26,11 @@
 							<td><%=excel.description%></td>
 							<td><%=excel.price%></td>
 							<td><%=excel.ForSale%></td>
-							<td> <%= f.collection_select(:shipping_category_id, @shipping_categories, :id, :name, { :include_blank => Spree.t('match_choices.none') }, { :class => 'select2' }) %></td>
+							<td><%= f.field_container :available_on, :class => ['form-group'] do %>
+							 <%= f.collection_select(:shipping_category_id, @shipping_categories, :id, :name, { :include_blank => Spree.t('match_choices.none') }, { :class => 'select2' }) %></td>
 							<td><%= button Spree.t('actions.create'), 'ok', 'submit', {class: 'btn-success'} %></td>
 						</tr>
+						<% end %>
 						<% end %>
 					<% end %>
 				</tbody>
