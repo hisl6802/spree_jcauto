@@ -17,20 +17,25 @@
 					</tr>
 				</thead>
 				<tbody>
-					<% @excels.each do |excel| %>
-						<%= form_for [:admin, @product], :html => {:multipart => true} do |f| %>
+					<%= form_for [:admin, @product], :html => { :multipart => true } do |f| %>
+  					<fieldset data-hook="new_product">
+    					<%= f.field_container :name, :class => ['form-group'] do %>
+      					<%= f.label :name, Spree.t(:name) %> <span class="required">*</span>
+      					<%= f.text_field :name, :class => 'form-control title' %>
+      					<%= f.error_message_on :name %>
+    					<% end %>
+					<!--% @excels.each do |excel| %-->
 
 						<tr>
 <!-- 							<td><%=excel.part_num%></td>
 							<td><%=excel.part_num%></td>
 							<td><%=excel.description%></td>
 							<td><%=excel.price%></td>
-							<td><%=excel.ForSale%></td> -->
-							<td><%= f.field_container :available_on, :class => ['form-group'] do %>
-							 <%= f.collection_select(:shipping_category_id, @shipping_categories, :id, :name, { :include_blank => Spree.t('match_choices.none') }, { :class => 'select2' }) %></td>
-							<td><%= button Spree.t('actions.create'), 'ok', 'submit', {class: 'btn-success'} %></td>
+							<td><%=excel.ForSale%></td>
+							<td></td>-->
+							<!--%= button Spree.t('actions.create'), 'ok', 'submit', {class: 'btn-success'} %-->
 						</tr>
-						<% end %>
+					</fieldset>
 						<% end %>
 					<% end %>
 				</tbody>
