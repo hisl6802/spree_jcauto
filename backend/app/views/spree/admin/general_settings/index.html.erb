@@ -18,7 +18,7 @@
 				</thead>
 				<tbody>
 					<% @excels.each do |excel| %>
-						<%= form_for [:admin, @product], :html {multipart => true} do |f|%>
+						<%= form_for [:admin, @product], :html => {:multipart => true} do |f|%>
 
 						<tr>
 							<td><%=excel.part_num%></td>
