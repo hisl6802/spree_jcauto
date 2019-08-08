@@ -56,13 +56,22 @@ module Spree
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
         open_part = Spreadsheet.open(params[:file].tempfile.path)
+
+        part = open_part.worksheet(0)
+           
+        #skip the first column of each row.
+        part_row = part.row(1)
+        part_size = part.count
+        
         if @excel.save
             
-            part = open_part.worksheet(0)
+          # part = open_part.worksheet(0)
            
-           #skip the first column of each row.
-           part_row = part.row(1)
-           part_size = part.count
+          #  #skip the first column of each row.
+          #  part_row = part.row(1)
+          #  part_size = part.count
+
+          
            if part_size <= 2
               #pulls out the name which is the part number of the product
               part_row = part.row(1)
