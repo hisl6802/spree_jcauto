@@ -178,7 +178,7 @@ module Spree
               #   flash[:success] = "Product didn't save"
               # end
               redirect_to admin_general_settings_url
-              flash[:success] = @excel
+              flash[:success] = @excel.type
           end
            # part.each do |row|
            #    #grab each name based upon the location of the data.
