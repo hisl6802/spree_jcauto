@@ -15,7 +15,7 @@ module Spree
         redirect_to action: :edit
       end
 
-      def upload_products_excel
+      def upload_product_excel
         require 'spreadsheet'
       end
 
