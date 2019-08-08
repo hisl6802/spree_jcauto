@@ -6,6 +6,7 @@ module Spree
       before_action :set_store
 
       def index
+        @excels = Excel.all
       end
 
       def edit
