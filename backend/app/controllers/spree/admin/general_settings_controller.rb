@@ -9,7 +9,15 @@ module Spree
         @excels = Excel.all
         @product = Product.new
       end
-
+      def destroy
+          @excel.destroy
+          if @excel.destroy
+              redirect_to admin_general_settings_url
+          else
+              redirect_to admin_general_settings_url
+          end
+      end
+      
       def edit
         @preferences_security = [:check_for_spree_alerts]
       end
