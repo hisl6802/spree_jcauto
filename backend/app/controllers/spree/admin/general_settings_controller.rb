@@ -9,6 +9,7 @@ module Spree
         @excels = Excel.all
         @product = Product.new
       end
+      
       def destroy
           @excel.destroy
           if @excel.destroy
