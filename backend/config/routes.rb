@@ -22,7 +22,6 @@ Spree::Core::Engine.add_routes do
       resources :product_properties do
         collection do
           post :update_positions
-          get :upload_product_excel
         end
       end
       resources :product_applications do

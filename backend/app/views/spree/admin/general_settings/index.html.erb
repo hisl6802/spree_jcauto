@@ -17,26 +17,17 @@
 					</tr>
 				</thead>
 				<tbody>
-					<%= form_for [:admin, @excel], :html => { :multipart => true } do |f| %>
-  					<fieldset data-hook="new_product">
-    					<%= f.field_container :name, :class => ['form-group'] do %>
-      					<%= f.label :name, Spree.t(:name) %> <span class="required">*</span>
-      					<%= f.text_field :name, :class => 'form-control title' %>
-      					<%= f.error_message_on :name %>
-    					<% end %>
-					<!--% @excels.each do |excel| %-->
-
-<!-- 						<tr>
+					<% @excels.each do |excel| %>
+						<tr>
  							<td><%=excel.part_num%></td>
 							<td><%=excel.part_num%></td>
 							<td><%=excel.description%></td>
 							<td><%=excel.price%></td>
 							<td><%=excel.ForSale%></td>
-							<td></td> -->
-							<!--%= button Spree.t('actions.create'), 'ok', 'submit', {class: 'btn-success'} %-->
-						<!-- </tr> -->
-					</fieldset>
-						<% end %>
+							<td></td>
+							<%= button Spree.t('actions.create'), 'ok', 'submit', {class: 'btn-success'} %>
+						</tr>
+					<% end %>
 				</tbody>
 			</table>	
 
