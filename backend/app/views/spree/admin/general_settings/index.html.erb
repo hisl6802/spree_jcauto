@@ -18,6 +18,7 @@
 				</thead>
 				<tbody>
 					<% @excels.each do |excel| %>
+					<% form_for [:admin,@product], :url => url_for(:controller => 'products')%>
 						<tr>
  							<td><%=excel.part_num%></td>
 							<td><%=excel.part_num%></td>
@@ -27,6 +28,7 @@
 							<td><%=excel.Quantity</td>
 							<td><%= button Spree.t('actions.create'), 'ok', 'submit', {class: 'btn-success'} %></td>
 						</tr>
+					<% end %>
 					<% end %>
 				</tbody>
 			</table>	
