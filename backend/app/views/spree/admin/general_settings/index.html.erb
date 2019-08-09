@@ -20,7 +20,7 @@
 					<% form_for [:admin, @product], :url => url_for(:controller => 'products') do |f|%>
 						<% @excels.each do |excel| %>
 						<tr>
- 							<td><%= f.text_field :part_num%></td>
+ 							<td><%= f.text_field :name%></td>
 							<td><%=excel.part_num%></td>
 							<td><%=excel.description%></td>
 							<td><%=excel.price%></td>
