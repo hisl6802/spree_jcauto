@@ -7,6 +7,7 @@ module Spree
 
       def index
         @excels = Excel.all
+        @product = Product.new
       end
 
       def edit
