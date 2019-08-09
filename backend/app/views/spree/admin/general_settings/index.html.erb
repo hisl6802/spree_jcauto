@@ -25,8 +25,9 @@
 							<td><%=excel.price%></td>
 							<td><%=excel.ForSale%></td>
 							<td><%=excel.Quantity%></td>
-							<td><%= button Spree.t('actions.create'), 'ok', 'submit', {class: 'btn-success'} %></td>
-						</tr>
+							<td><%= link_to 'Create', new_admin_product(@excel) %></td>
+<!-- 							<td><%= link_to 'Destroy'%></td>
+ -->						</tr>
 					<% end %>
 				</tbody>
 			</table>	
