@@ -11,8 +11,8 @@ module Spree
       end
 
       def destroy
-          excel.destroy
-          if excel.destroy
+          @excel.destroy
+          if @excel.destroy
               redirect_to admin_general_settings_url
           else
               redirect_to admin_general_settings_url
