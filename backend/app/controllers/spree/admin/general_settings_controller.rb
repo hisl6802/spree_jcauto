@@ -185,7 +185,7 @@ module Spree
               if @excel.save
                 @product = Product.create
                 @product.id = @excel.part_num
-                flash[:success] = @product.id
+                flash[:success] = @product
                 #redirect_to admin_general_settings_url
               end
           end
