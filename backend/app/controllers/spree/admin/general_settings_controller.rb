@@ -185,7 +185,14 @@ module Spree
               if @excel.save
                 @product = Product.create
                 @product.id = @excel.part_num
-                flash[:success] = @product
+                @product.description = @excel.description
+                @product.available_on = @excel.ForSale
+                if @product.save
+                  flash[:success] = "Sucess"
+                else
+                  flash[:success] = "Still missing something"
+                end
+
                 #redirect_to admin_general_settings_url
               end
           end
