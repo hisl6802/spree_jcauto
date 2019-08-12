@@ -184,6 +184,7 @@ module Spree
               # end
               if @excel.save
                 @product = Product.new
+                flash[:success] = @product
                 #redirect_to admin_general_settings_url
               end
           end
