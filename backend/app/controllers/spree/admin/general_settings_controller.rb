@@ -7,11 +7,10 @@ module Spree
 
       def index
         @excels = Excel.all
-        @product = Product.new
       end
 
       def destroy
-          @excel.destroy
+          @excel=excel
           if @excel.destroy
               redirect_to admin_general_settings_url
           else
