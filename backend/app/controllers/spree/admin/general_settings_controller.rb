@@ -183,8 +183,8 @@ module Spree
               #   flash[:success] = "Product didn't save"
               # end
               if @excel.save
-                redirect_to admin_general_settings_url
-                flash[:success] = @excel.id
+                @product = Product.new
+                #redirect_to admin_general_settings_url
               end
           end
            # part.each do |row|
@@ -193,7 +193,7 @@ module Spree
            #    part_name = part_name.to_int
            #    part_name = part_name.to_s
            #  end
-        #render :action => :upload
+        render :action => :upload
       end
 
       # Upload excel document to populate database
