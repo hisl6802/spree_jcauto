@@ -26,7 +26,7 @@
 							<td><%=excel.ForSale%></td>
 							<td><%=excel.Quantity%></td>
 							<td><%= link_to 'Create', admin_products_url(:excel => excel.id), method: :post, data: {confirm: 'Are you sure'} %></td>
-							<td><%= link_to 'Delete', :controller => "general_settings", :action =>"delete",:id =>excel.id %></td>
+							<td><%= link_to 'Delete', :controller => "general_settings", :action =>"delete",:id =>excel %></td>
  							<!--td--><!--%=link_to 'Delete', admin_general_settings_url(:excel => excel.id), method: :delete, data: { confirm: 'Are you sure?' } %></td-->						
  						</tr>
 					<% end %>
