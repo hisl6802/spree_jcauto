@@ -20,13 +20,13 @@
 						<% @excels.each do |excel| %>
 						<tr>
  							<td><%=excel.part_num%></td>
-							<td><%=excel.id%></td>
+							<td><%=excel.part_num%></td>
 							<td><%=excel.description%></td>
 							<td><%=excel.price%></td>
 							<td><%=excel.ForSale%></td>
 							<td><%=excel.Quantity%></td>
-							<td><%= link_to 'Create', admin_products_url(excel), method: :post, data: {confirm: 'Are you sure'} %></td>
- 							<td><%=link_to 'Delete', admin_general_settings_url(excel), method: :delete, data: { confirm: 'Are you sure?' } %></td>						
+							<td><%= link_to 'Create', admin_products_url(:excel => excel.id), method: :post, data: {confirm: 'Are you sure'} %></td>
+ 							<td><%=link_to 'Delete', admin_general_settings_url(:excel => excel.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>						
  						</tr>
 					<% end %>
 				</tbody>
