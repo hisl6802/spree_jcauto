@@ -75,7 +75,7 @@ module Spree
 
               #pulls out the category from the product sheet
               #(needs to be a string given the dash in the category)
-              category = part_row[1].to_s
+              @category = part_row[1].to_s
 
               #pulls out the Description from the product sheet
               #(needs to be a string and will have to work to ensure this works when putting into a text format)
@@ -83,7 +83,7 @@ module Spree
 
               #pulls out the Item Tax Code
               #(Not sure on this one need to figure out)
-              item_tax_code = part_row[3]#what is this column numbers and letters? Just Numbers
+              @item_tax_code = part_row[3]#what is this column numbers and letters? Just Numbers
 
               #pulls out the Unit Price of the item
               #(needs to be a decimal)
@@ -184,7 +184,8 @@ module Spree
               # end
               if @excel.save
                 @product = Product.create
-                flash[:success] = @product
+                @product.id = @excel.part_num
+                flash[:success] = @product.id
                 #redirect_to admin_general_settings_url
               end
           end
