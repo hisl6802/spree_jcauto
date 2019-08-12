@@ -184,6 +184,7 @@ module Spree
               # end
               if @excel.save
                 redirect_to admin_general_settings_url
+                flash[:success] = @excel.id
               end
           end
            # part.each do |row|
