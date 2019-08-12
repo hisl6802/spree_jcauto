@@ -10,7 +10,7 @@ module Spree
       end
 
       def destroy
-          @excel = Excel.find(params[:id])
+          @excel.destroy
       end
       
       def edit
