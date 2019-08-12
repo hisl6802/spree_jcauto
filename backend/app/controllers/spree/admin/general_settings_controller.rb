@@ -183,7 +183,7 @@ module Spree
               #   flash[:success] = "Product didn't save"
               # end
               if @excel.save
-                @product = Product.new
+                @product = Product.create
                 flash[:success] = @product
                 #redirect_to admin_general_settings_url
               end
