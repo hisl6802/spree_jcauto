@@ -10,7 +10,7 @@ module Spree
       end
 
       def destroy
-          @excel=excel
+          @excel.destroy
           if @excel.destroy
               redirect_to admin_general_settings_url
           else
