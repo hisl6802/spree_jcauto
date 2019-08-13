@@ -19,10 +19,10 @@ Spree::Core::Engine.add_routes do
     resources :tax_categories
 
     resources :products do
+        post :upload_product_excel
       resources :product_properties do
         collection do
           post :update_positions
-          post :upload_product_excel
         end
       end
       resources :product_applications do
