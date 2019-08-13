@@ -183,16 +183,16 @@ module Spree
               #   flash[:success] = "Product didn't save"
               # end
               if @excel.save
-                @product = Product.create
-                # @product.id = @excel.part_num
-                # @product.name = @excel.part_num
+                @product = Product.new
+                #@product.id = @excel.part_num
+                #@product.name = @excel.part_num
                 # @product.price = @excel.price
                 # @product.description = @excel.description
                 # @product.available_on = @excel.ForSale
                 if @product.save
-                  flash[:success] = "Success"
+                  flash[:success] = @product#{}"Success"
                 else
-                  flash[:success] = "Still missing something"
+                  flash[:success] = @product#{}"Still missing something"
                 end
 
                 #redirect_to admin_general_settings_url
