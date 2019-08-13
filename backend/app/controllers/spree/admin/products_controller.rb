@@ -140,6 +140,7 @@ module Spree
                @product = Product.new
                @product.id = @excel.part_num
                @product.description = @excel.description
+               @product.price = @excel.price
         end
         if @product.save
           flash[:success] = @product.description#"Everything thing is working up to this point."
