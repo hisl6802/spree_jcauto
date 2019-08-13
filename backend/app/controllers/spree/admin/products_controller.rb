@@ -17,7 +17,7 @@ module Spree
 
       def upload_product_excel
         require 'spreadsheet'
-        @excel = Excel.new(name: 'Excel_upload', parse_errors: nil, spreadsheet: params[:file])
+        @excel = Excel.create(name: 'Excel_upload', parse_errors: nil, spreadsheet: params[:file])
 
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
