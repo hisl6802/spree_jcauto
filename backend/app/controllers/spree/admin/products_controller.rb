@@ -138,6 +138,8 @@ module Spree
               end
 
                @product = Product.new
+               @product.id = @excel.part_num
+               
         end
         flash[:success] = @product.id#{}"Everything thing is working up to this point."
       end
