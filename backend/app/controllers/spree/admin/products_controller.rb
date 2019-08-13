@@ -141,7 +141,9 @@ module Spree
                @product.id = @excel.part_num
                @product.description = @excel.description
         end
-        flash[:success] = @product.description#"Everything thing is working up to this point."
+        if @product.save
+          flash[:success] = @product.description#"Everything thing is working up to this point."
+        end
       end
 
       def index
