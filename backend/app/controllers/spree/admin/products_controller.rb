@@ -136,18 +136,10 @@ module Spree
               unless @excel.Quantity.nil?
                 @excel.Quantity = @excel.Quantity.to_int
               end
-              
-              # @product = Product.new(name: part_name,description: descrip)
-              # #redirect_to admin_product_path(@product)
-              # @product.master.price = price
-              # if @product.save
-              #   #flash[:success] = "Product successfully saved"
-              #   redirect_to edit_admin_product_url(@product)
-              # else
-              #   flash[:success] = "Product didn't save"
-              # end
+
+               @product = Product.new
         end
-        flash[:success] = "Everything thing is working up to this point."
+        flash[:success] = @product#{}"Everything thing is working up to this point."
       end
 
       def index
