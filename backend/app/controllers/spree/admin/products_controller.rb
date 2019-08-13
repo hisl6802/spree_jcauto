@@ -147,7 +147,7 @@ module Spree
         else
           flash[:success] = "I am still missing the price so uploading shouldn't work."
         end
-        flash[:success] = "Does this get rid of the Spree::ProductExists"
+        #flash[:success] = "Does this get rid of the Spree::ProductExists"
       end
 
       def index
