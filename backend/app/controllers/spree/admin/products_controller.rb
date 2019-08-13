@@ -17,6 +17,8 @@ module Spree
 
       def upload_product_excel
         require 'spreadsheet'
+        @excel = Excel.new(name: 'Excel_upload', parse_errors: nil, spreadsheet: params[:file])
+        flash[:success] = "I may have just solved a portion of the problem"
       end
 
       def index
