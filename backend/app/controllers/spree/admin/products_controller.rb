@@ -137,7 +137,7 @@ module Spree
                 @excel.Quantity = @excel.Quantity.to_int
               end
 
-               @product = {"id" => @excel.part_num,"name" => @excel.part_num, "description" => @excel.description,"price" => @excel.price}
+               @product = Product.create(id: @excel.part_num)
                # @product.id = @excel.part_num
                # @product.description = @excel.description
                # @product.price = @excel.price
