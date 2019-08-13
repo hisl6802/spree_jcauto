@@ -15,6 +15,10 @@ module Spree
         redirect_to action: :edit
       end
 
+      def upload
+        @path = ""
+      end
+
       def upload_product_excel
         require 'spreadsheet'
         @excel = Excel.create(name: 'Excel_upload', parse_errors: nil, spreadsheet: params[:file])
