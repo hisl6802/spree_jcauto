@@ -137,16 +137,17 @@ module Spree
                 @excel.Quantity = @excel.Quantity.to_int
               end
 
-               @product = Product.new
+               @product = []#Product.new
                @product.id = @excel.part_num
                @product.description = @excel.description
                @product.price = @excel.price
         end
-        if @product.save
-          flash[:success] = @product.description#"Everything thing is working up to this point."
-        else
-          flash[:success] = "I am still missing the price so uploading shouldn't work."
-        end
+        # if @product.save
+        #   flash[:success] = @product.description#"Everything thing is working up to this point."
+        # else
+        #   flash[:success] = "I am still missing the price so uploading shouldn't work."
+        # end
+        flash[:success] = "Does this get rid of the Spree::ProductExists"
       end
 
       def index
