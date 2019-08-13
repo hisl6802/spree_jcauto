@@ -184,11 +184,11 @@ module Spree
               # end
               if @excel.save
                 @product = Product.create
-                @product.id = @excel.part_num
-                @product.name = @excel.part_num
-                @product.price = @excel.price
-                @product.description = @excel.description
-                @product.available_on = @excel.ForSale
+                # @product.id = @excel.part_num
+                # @product.name = @excel.part_num
+                # @product.price = @excel.price
+                # @product.description = @excel.description
+                # @product.available_on = @excel.ForSale
                 if @product.save
                   flash[:success] = "Success"
                 else
