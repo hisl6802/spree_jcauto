@@ -18,6 +18,10 @@ module Spree
       def upload_product_excel
         require 'spreadsheet'
         @excel = Excel.new(name: 'Excel_upload', parse_errors: nil, spreadsheet: params[:file])
+
+        logger.info "********* File: #{params[:file]}"
+        logger.debug "********** Errors: #{@excel.errors.full_messages}"
+        open_part = Spreadsheet.open(params[:file].tempfile.path)
         flash[:success] = "I may have just solved a portion of the problem"
       end
 
