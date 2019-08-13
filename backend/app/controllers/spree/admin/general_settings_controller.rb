@@ -192,7 +192,7 @@ module Spree
                 if @product.save
                   flash[:success] = @product#{}"Success"
                 else
-                  flash[:success] = @product#{}"Still missing something"
+                  flash[:success] = "Still missing something"
                 end
 
                 #redirect_to admin_general_settings_url
