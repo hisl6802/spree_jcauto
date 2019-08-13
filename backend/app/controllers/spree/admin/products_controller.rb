@@ -26,7 +26,12 @@ module Spree
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
         open_part = Spreadsheet.open(params[:file].tempfile.path)
-        flash[:success] = @excel.spreadsheet#{}"I may have just solved a portion of the problem"
+        part = open_part.worksheet(0)
+           
+        #skip the first column of each row.
+        part_row = part.row(1)
+        part_size = part.count
+        flash[:success] = "I have just solved the next portion of the problem"
       end
 
       def index
