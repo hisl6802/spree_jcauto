@@ -143,6 +143,8 @@ module Spree
         end
         if @product.save
           flash[:success] = @product.description#"Everything thing is working up to this point."
+        else
+          flash[:success] = "I am still missing the price so uploading shouldn't work."
         end
       end
 
