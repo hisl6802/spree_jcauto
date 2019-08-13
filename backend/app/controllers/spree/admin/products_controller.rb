@@ -139,7 +139,7 @@ module Spree
 
                @product = Product.new
         end
-        flash[:success] = @product#{}"Everything thing is working up to this point."
+        flash[:success] = @product.id#{}"Everything thing is working up to this point."
       end
 
       def index
