@@ -21,7 +21,7 @@ module Spree
 
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
-        open_part = Spreadsheet.open(params[:file])
+        open_part = Spreadsheet.open("#{params[:file]}")
         flash[:success] = @excel.spreadsheet#{}"I may have just solved a portion of the problem"
       end
 
