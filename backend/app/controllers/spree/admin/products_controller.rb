@@ -22,7 +22,7 @@ module Spree
         logger.info "********* File: #{params[:file]}"
         logger.debug "********** Errors: #{@excel.errors.full_messages}"
         #open_part = Spreadsheet.open(params[:file].tempfile.path)
-        flash[:success] = @excel#{}"I may have just solved a portion of the problem"
+        flash[:success] = params[:file]#{}"I may have just solved a portion of the problem"
       end
 
       def index
