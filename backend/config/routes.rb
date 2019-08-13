@@ -19,6 +19,7 @@ Spree::Core::Engine.add_routes do
     resources :tax_categories
 
     get '/products/upload_product_excel', to: "products#upload_product_excel"
+    post '/products/upload_product_excel',to: "products#upload_product_excel"
     resources :products do
 #        post :upload_product_excel
 #        get :upload_product_excel
