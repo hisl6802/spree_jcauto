@@ -140,7 +140,7 @@ module Spree
                 flash[:success] = "Excel sheet properly saved"
               end
 
-               # @product = Product.create(id: @excel.part_num,name:@excel.part_num)
+               @product = Spree::Product.create
                # #@product.id = @excel.part_num
                # @product.description = @excel.description
                # @product.price = @excel.price
