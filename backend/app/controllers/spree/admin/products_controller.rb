@@ -138,7 +138,7 @@ module Spree
               end
               if @excel.save
                 @product = Spree::Product.new
-                @product.id = @excel.id
+                @product.id = @excel.part_num
                 flash[:success] = @product.id#{}"Excel sheet properly saved"
               end
 
