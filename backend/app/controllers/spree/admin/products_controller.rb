@@ -168,6 +168,10 @@ module Spree
         respond_with(@collection)
       end
 
+      def excel_index
+        @excels = Excel.all
+      end
+
       def update
         if params[:product][:taxon_ids].present?
           params[:product][:taxon_ids] = params[:product][:taxon_ids].split(',')
