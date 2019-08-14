@@ -136,11 +136,14 @@ module Spree
               unless @excel.Quantity.nil?
                 @excel.Quantity = @excel.Quantity.to_int
               end
+              if @excel.save
+                flash[:success] = "Excel sheet properly saved"
+              end
 
-               @product = Product.create(id: @excel.part_num,name:@excel.part_num)
-               #@product.id = @excel.part_num
-               @product.description = @excel.description
-               @product.price = @excel.price
+               # @product = Product.create(id: @excel.part_num,name:@excel.part_num)
+               # #@product.id = @excel.part_num
+               # @product.description = @excel.description
+               # @product.price = @excel.price
         end
         # if @product.save
         #   flash[:success] = @product.description#"Everything thing is working up to this point."
