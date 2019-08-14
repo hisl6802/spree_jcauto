@@ -152,6 +152,7 @@ module Spree
                # #@product.id = @excel.part_num
                # @product.description = @excel.description
                # @product.price = @excel.price
+               redirect_to admin_products(@product)
         end
         # if @product.save
         #   flash[:success] = @product.description#"Everything thing is working up to this point."
