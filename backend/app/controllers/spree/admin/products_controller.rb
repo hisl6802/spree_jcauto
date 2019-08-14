@@ -144,7 +144,9 @@ module Spree
               end
 
               if @product.save
-                flash[:sucess] = "Finally"
+                flash[:success] = "Finally"
+              else
+                flash[:success] = "Don't give up"
               end
                
                # #@product.id = @excel.part_num
