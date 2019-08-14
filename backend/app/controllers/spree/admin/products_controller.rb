@@ -137,10 +137,11 @@ module Spree
                 @excel.Quantity = @excel.Quantity.to_int
               end
               if @excel.save
-                flash[:success] = "Excel sheet properly saved"
+                @product = Spree::Product.new
+                flash[:success] = @product#{}"Excel sheet properly saved"
               end
 
-               @product = Spree::Product.new
+               
                # #@product.id = @excel.part_num
                # @product.description = @excel.description
                # @product.price = @excel.price
