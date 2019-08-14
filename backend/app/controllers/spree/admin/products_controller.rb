@@ -143,6 +143,9 @@ module Spree
                 flash[:success] = @product.price#{}"Excel sheet properly saved"
               end
 
+              if @product.save
+                flash[:sucess] = "Finally"
+              end
                
                # #@product.id = @excel.part_num
                # @product.description = @excel.description
