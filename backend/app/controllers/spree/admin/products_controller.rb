@@ -136,8 +136,9 @@ module Spree
               unless @excel.Quantity.nil?
                 @excel.Quantity = @excel.Quantity.to_int
               end
+
               if @excel.save
-                @product = Spree::Product.new
+                @product = Spree::Product.create!
                 @product.id = @excel.part_num
                 @product.price = @excel.price
                 flash[:success] = @product.price#{}"Excel sheet properly saved"
@@ -152,7 +153,7 @@ module Spree
                # #@product.id = @excel.part_num
                # @product.description = @excel.description
                # @product.price = @excel.price
-               redirect_to admin_products_path
+               redirect_to admin_products_url
         end
         # if @product.save
         #   flash[:success] = @product.description#"Everything thing is working up to this point."
