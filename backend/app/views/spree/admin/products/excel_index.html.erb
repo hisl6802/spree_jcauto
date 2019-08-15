@@ -1,11 +1,20 @@
 <div class="container">
 	<div class="row">
-	<%= form_for [:admin, @product], :html => {:multipart => true} do |f| %>
-		<%= f.field_container :name, :class => ['form-group'] do %>
- 		<%= f.label :name, Spree.t(:name)%><span class= 'required'>*</span>
- 		<%= f.text_field :name, :class => 'form-control title' %>
- 		<%= f.error_message_on :name %>
- 		<% end %>
-	<% end %>
+		<div class="col-md-12 text-center">
+			<h2>Adding products from Excel uploads</h2>
+
+			<%= form_for [:admin, @product], :html => {:multipart => true} do |f| %>
+			<%= f.field_container :name, :class => ['form-group'] do %>
+ 			<%= f.label :name, Spree.t(:name)%><span class= 'required'>*</span>
+ 			<%= f.collection_select(:name, @excel.part_num,:id) %>
+ 			<%= f.error_message_on :name %>
+ 			<% end %>
+ 			<div data-hook="new_product_attrs" class ="row">
+ 			<%= f.field_container :sku, :class => ['form-group'] do %>
+ 			<%= f.label :sku, Spree.t(:sku) %>
+ 			<%= f.text_field :sku, :size => 16, :class => 'form-control' %>
+ 			<%= f.error_message_on :sku %>
+		<% end %>
+		</div>
 	</div>
 </div>
