@@ -36,7 +36,7 @@
 	</div>
 </div> -->
 
-<%= form_for(Product.new) do |f| %>
+<%= form_for [:admin, @product] do |f| %>
 	<%= f.label :name, Spree.t(:name)%>
 	<%= f.text_field :name %>
 <% end %>
