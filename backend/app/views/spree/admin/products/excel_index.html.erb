@@ -1,8 +1,11 @@
 <div class="container">
 	<div class="row">
-	<%= form_for [:admin, @product] do |f| %>
- 		<%= f.label :name, Spree.t(:name)%>
- 		<%= f.text_field :name %>
+	<%= form_for [:admin, @product], :html => {:multipart => true} do |f| %>
+		<%= f.field_container :name, :class => ['form-group'] do %>
+ 		<%= f.label :name, Spree.t(:name)%><span class= 'required'>*</span>
+ 		<%= f.text_field :name, :class => 'form-control title' %>
+ 		<%= f.error_message_on :name %>
+ 		<% end %>
 	<% end %>
 	</div>
 </div>
