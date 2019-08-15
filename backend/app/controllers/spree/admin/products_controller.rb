@@ -4,7 +4,7 @@ module Spree
       
 
       helper 'spree/products'
-
+      #autocomplete :part_num,
       before_action :load_data, except: :index
       create.before :create_before
       update.before :update_before
