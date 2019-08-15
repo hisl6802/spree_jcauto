@@ -6,7 +6,7 @@
 			<%= form_for [:admin, @product], :html => {:multipart => true} do |f| %>
 			<%= f.field_container :name, :class => ['form-group'] do %>
  			<%= f.label :name, Spree.t(:name)%><span class= 'required'>*</span>
- 			<%= f.collection_select(:name, @excel,:id,:name) %>
+ 			<%= f.collection_select(:name, @excel,:id,:part_num) %>
  			<%= f.error_message_on :name %>
  			<% end %>
  			<div data-hook="new_product_attrs" class ="row">
