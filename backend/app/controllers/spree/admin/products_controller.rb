@@ -138,22 +138,8 @@ module Spree
               end
 
               if @excel.save
-                @product = Spree::Product.new
-                @product.id = @excel.part_num
-                @product.price = @excel.price
-                flash[:success] = @product.price
+                redirect_to admin_products_excel_index_url
               end
-
-              if @product.save
-                flash[:success] = "Finally"
-              else
-                flash[:success] = "Don't give up"
-              end
-               
-               # #@product.id = @excel.part_num
-               # @product.description = @excel.description
-               # @product.price = @excel.price
-               redirect_to admin_products_excel_index_url
         end
         # if @product.save
         #   flash[:success] = @product.description#"Everything thing is working up to this point."

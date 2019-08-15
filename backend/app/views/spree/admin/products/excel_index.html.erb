@@ -1,12 +1,12 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 text-center">
-			<h2>Playing on my computer all day. Fuck off loser</h2>
+			<h2>Adding Products from Excel upload</h2>
 
 			<%= form_for [:admin, @product], :html => {:multipart => true} do |f| %>
 			<%= f.field_container :name, :class => ['form-group'] do %>
  			<%= f.label :name, Spree.t(:name)%><span class= 'required'>*</span>
- 			<%= f.collection_select(:name, @excel,:id,:part_num) %>
+ 			<%= f.collection_select(:name, @excel,:part_num,:part_num) %>
  			<%= f.error_message_on :name %>
  			<% end %>
  			<div data-hook="new_product_attrs" class ="row">
