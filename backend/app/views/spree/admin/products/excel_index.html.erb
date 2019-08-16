@@ -4,8 +4,18 @@
 
       <h2>Adding Products from Excel upload</h2>
       <table class="table sortable">
+        <thead>
+          <tr>
+          <th>Part #</th>
+          <th>sku</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Available on</th>
+          <th>Shipping category</th>
+          <th colspan="2">Make a Product</th>
+        </tr>
 			<%= form_for [:admin, @product], :html => {:multipart => true} do |f| %>
-      
+      <tbody>
         <tr>
           <td>
     			<%= f.field_container :name, :class => ['form-group'] do %>
@@ -22,8 +32,6 @@
      			<%= f.error_message_on :sku %>
      			<% end %>
           </div></td>
-        
-
           
           <td>
      			<div data-hook="new_product_available_on" class="col-md-4">
@@ -61,7 +69,8 @@
           	<%= f.error_message_on :shipping_category_id %>
         	<% end %>
       		</div></td>
-          <tr>
+        </tr>
+      </tbody>
 
       		<div data-hook="product-from-prototype" id="product-from-prototype">
       		<%= render :file => 'spree/admin/prototypes/show' if @prototype %>
