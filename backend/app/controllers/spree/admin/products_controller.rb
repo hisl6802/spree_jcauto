@@ -156,7 +156,7 @@ module Spree
 
       def excel_index
         @excels = Excel.all
-        @product = Product.new
+        #@product = Product.new
       end
 
       def update
