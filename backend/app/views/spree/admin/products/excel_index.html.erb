@@ -1,5 +1,5 @@
 			<h2>Adding Products from Excel upload</h2>
-
+      <table>
 			<%= form_for [:admin, @product], :html => {:multipart => true} do |f| %>
     			<%= f.field_container :name, :class => ['form-group'] do %>
      			<%= f.label :name, Spree.t(:name)%><span class= 'required'>*</span>
@@ -54,3 +54,4 @@
     		<%= render :partial => 'spree/admin/shared/new_resource_links' %>
 
 		<% end %>
+  </table>
