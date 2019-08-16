@@ -1,6 +1,3 @@
-<div class="container">
-	<div class="row">
-		<div class="col-md-12 text-center">
 			<h2>Adding Products from Excel upload</h2>
 
 			<%= form_for [:admin, @product], :html => {:multipart => true} do |f| %>
@@ -10,7 +7,7 @@
      			<%= f.error_message_on :name %>
      			<% end %>
 
-     			<div data-hook="new_product_attrs" class ="column">
+     			<div data-hook="new_product_attrs" class ="row">
      			<%= f.field_container :sku, :class => ['form-group'] do %>
      			<%= f.label :sku, Spree.t(:sku) %>
      			<%= f.collection_select(:sku, @excel,:part_num,:part_num) %>
@@ -57,6 +54,3 @@
     		<%= render :partial => 'spree/admin/shared/new_resource_links' %>
 
 		<% end %>
-		</div>
-	</div>
-</div>
