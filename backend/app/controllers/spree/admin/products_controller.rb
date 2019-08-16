@@ -35,7 +35,7 @@ module Spree
 
               #pulls out the name which is the part number of the product
               #(needs to be a string)
-              @excel.part_num = part_row[0].to_int.to_s
+              @excel.part_num = part_row[0].to_i.to_s
 
               #pulls out the category from the product sheet
               #(needs to be a string given the dash in the category)
