@@ -10,7 +10,7 @@
      			<%= f.error_message_on :name %>
      			<% end %>
 
-     			<div data-hook="new_product_attrs" class ="row">
+     			<div data-hook="new_product_attrs" class ="column">
      			<%= f.field_container :sku, :class => ['form-group'] do %>
      			<%= f.label :sku, Spree.t(:sku) %>
      			<%= f.collection_select(:sku, @excel,:part_num,:part_num) %>
