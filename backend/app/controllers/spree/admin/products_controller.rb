@@ -132,7 +132,7 @@ module Spree
 
               #Quantity
               #(needs to be an integer)
-              @excel.Quantity = part_row[23].to_int
+              @excel.Quantity = part_row[23]
               unless @excel.Quantity.nil?
                 @excel.Quantity = @excel.Quantity.to_int
               end
