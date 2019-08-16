@@ -243,7 +243,7 @@ module Spree
         @option_types = OptionType.order(:name)
         @tax_categories = TaxCategory.order(:name)
         @shipping_categories = ShippingCategory.order(:name)
-        @excel = Excel.order(:created_at)
+        @excel = Excel.order(:description)
       end
 
       def collection
