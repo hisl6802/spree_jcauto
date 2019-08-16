@@ -6,19 +6,24 @@
 
 			<%= form_for [:admin, @product], :html => {:multipart => true} do |f| %>
       <table>
+        <tr>
+          <td>
     			<%= f.field_container :name, :class => ['form-group'] do %>
      			<%= f.label :name, Spree.t(:name)%><span class= 'required'>*</span>
      			<%= f.collection_select(:name, @excel,:part_num,:part_num) %>
      			<%= f.error_message_on :name %>
-     			<% end %>
+     			<% end %></td>
 
+          <td>
      			<div data-hook="new_product_sku" class="col-md-4">
      			<%= f.field_container :sku, :class => ['form-group'] do %>
      			<%= f.label :sku, Spree.t(:sku) %>
      			<%= f.collection_select(:sku, @excel,:part_num,:part_num) %>
      			<%= f.error_message_on :sku %>
      			<% end %>
-          </div>
+          </div></td>
+        </tr>
+
           
 
      			<div data-hook="new_product_available_on" class="col-md-4">
