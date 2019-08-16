@@ -11,13 +11,13 @@
      			<%= f.error_message_on :name %>
      			<% end %></tr>
 
-     			<tr><div data-hook="new_product_attrs" class ="row">
+     			<tr>
      			<%= f.field_container :sku, :class => ['form-group'] do %>
      			<%= f.label :sku, Spree.t(:sku) %>
      			<%= f.collection_select(:sku, @excel,:part_num,:part_num) %>
      			<%= f.error_message_on :sku %>
      			<% end %>
-         </div></tr>
+          </tr>
 
      			<div data-hook="new_product_available_on" class="col-md-4">
           <%= f.field_container :available_on, :class => ['form-group'] do %>
