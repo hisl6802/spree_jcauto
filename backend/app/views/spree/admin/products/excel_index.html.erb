@@ -8,11 +8,10 @@
           <tr>
           <th>Part #</th>
           <th>sku</th>
+          <th>Available on</th>
           <th>Description</th>
           <th>Price</th>
-          <th>Available on</th>
           <th>Shipping category</th>
-          <th colspan="2">Make a Product</th>
         </tr>
 			<%= form_for [:admin, @product], :html => {:multipart => true} do |f| %>
       <tbody>
@@ -41,9 +40,6 @@
           <%= f.error_message_on :available_on %>
           <% end %>
           </div></td>
-        </tr>
-      		
-          <tr>
           <td>
       		<div data-hook="new_product_description" class="col-md-4">
       		<%= f.field_container :description, :class => ['form-group'] do %>
