@@ -141,12 +141,6 @@ module Spree
                 redirect_to admin_products_excel_index_url
               end
         end
-        # if @product.save
-        #   flash[:success] = @product.description#"Everything thing is working up to this point."
-        # else
-        #   flash[:success] = "I am still missing the price so uploading shouldn't work."
-        # end
-        #flash[:success] = "Does this get rid of the Spree::ProductExists"
       end
 
       def index
