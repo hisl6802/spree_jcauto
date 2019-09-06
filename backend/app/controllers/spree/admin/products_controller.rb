@@ -144,7 +144,7 @@ module Spree
               part.each 1 do |row|
                 @excel.part_num = row[1]
                 if @excel.save
-                  flash[:success] = "Excel Sheet saved, now need to work on saving multiple excel rows to seperate database rows"
+                  flash[:success] = @excel.part_num#{}"Excel Sheet saved, now need to work on saving multiple excel rows to seperate database rows"
                 end
               end
         end
