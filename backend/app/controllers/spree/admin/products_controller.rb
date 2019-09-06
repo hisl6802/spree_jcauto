@@ -141,10 +141,16 @@ module Spree
                 redirect_to admin_products_excel_index_url
               end
         else
+              excel_row = 0
               part.each 1 do |row|
+                excel_row += 1
+                #Does the excel database entry need to include a spreadsheet entry each time or can the create be done with out the need for the spreadsheet column?
+                # if
+                # @excel = 
+
                 @excel.part_num = row[1]
                 if @excel.save
-                  flash[:success] = @excel.part_num#{}"Excel Sheet saved, now need to work on saving multiple excel rows to seperate database rows"
+                  flash[:success] = excel_row#"Excel Sheet saved, now need to work on saving multiple excel rows to seperate database rows"
                 end
               end
         end
