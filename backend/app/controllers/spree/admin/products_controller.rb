@@ -145,12 +145,13 @@ module Spree
               part.each 1 do |row|
                 excel_row += 1
                 #Does the excel database entry need to include a spreadsheet entry each time or can the create be done with out the need for the spreadsheet column?
-                # if
-                # @excel = 
+                if excel_row > 1
+                  @excel = Excel.create(name:"Multiple part upload",parse_errors: nil)
+                end 
 
                 @excel.part_num = row[1]
                 if @excel.save
-                  flash[:success] = excel_row#"Excel Sheet saved, now need to work on saving multiple excel rows to seperate database rows"
+                  flash[:success] = @excel.name#"Excel Sheet saved, now need to work on saving multiple excel rows to seperate database rows"
                 end
               end
         end
