@@ -140,6 +140,13 @@ module Spree
               if @excel.save
                 redirect_to admin_products_excel_index_url
               end
+        else
+              part.each 1 do |row|
+                @excel.part_num = row[1]
+                if @excel.save
+                  flash[:success] = "Excel Sheet saved, now need to work on saving multiple excel rows to seperate database rows"
+                end
+              end
         end
       end
 
