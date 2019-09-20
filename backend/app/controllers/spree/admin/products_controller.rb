@@ -151,7 +151,8 @@ module Spree
 
                 @excel.part_num = row[1]
                 if @excel.save
-                  flash[:success] = @excel.name#"Excel Sheet saved, now need to work on saving multiple excel rows to seperate database rows"
+                  #flash[:success] = @excel.name#"Excel Sheet saved, now need to work on saving multiple excel rows to seperate database rows"
+                  redirect_to admin_products_excel_index_url
                 end
               end
         end
