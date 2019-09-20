@@ -149,7 +149,7 @@ module Spree
                   @excel = Excel.create(name:"Multiple part upload",parse_errors: nil)
                 end 
 
-                @excel.part_num = row[1]
+                @excel.part_num = row[0]
                 if @excel.save
                   flash[:success] = @excel.name#"Excel Sheet saved, now need to work on saving multiple excel rows to seperate database rows"
                 end
