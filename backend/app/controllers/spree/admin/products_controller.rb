@@ -31,157 +31,47 @@ module Spree
         #skip the first column of each row.
         part_row = part.row(1)
         part_size = part.count
-        #if part_size <= 2
 
-              # #pulls out the name which is the part number of the product
-              # #(needs to be a string)
-              # @excel.part_num = part_row[0].to_i.to_s
+        excel_row = 0
+        part.each 1 do |row|
+          excel_row += 1
+          #Does the excel database entry need to include a spreadsheet entry each time or can the create be done with out the need for the spreadsheet column?
+          if excel_row > 1
+            @excel = Excel.create(name:"Multiple part upload",parse_errors: nil)
+          end 
 
-              # #pulls out the category from the product sheet
-              # #(needs to be a string given the dash in the category)
-              # @category = part_row[1].to_s
+          @excel.part_num = row[0].to_i.to_s
+          @excel.description = row[2].to_s
+          @excel.price = row[4]
+          @excel.LastPurchasecost = row[5]
+          @excel.Productlength = row[6]
+          @excel.Productwidth = part_row[7].to_s
+          @excel.Productheight = part_row[8].to_s
+          @excel.Productweight = part_row[9].to_s
+          @excel.Application = part_row[11].to_s
+          @excel.Location = part_row[12].to_s
+          @excel.CrossReference = part_row[14].to_s
 
-              # #pulls out the Description from the product sheet
-              # #(needs to be a string and will have to work to ensure this works when putting into a text format)
-              # @excel.description = part_row[2].to_s
+          @excel.CastingNum = part_row[15]
+          unless @excel.CastingNum.nil?
+            @excel.CastingNum = @excel.CastingNum.to_int
+          end
 
-              # #pulls out the Item Tax Code
-              # #(Not sure on this one need to figure out)
-              # @item_tax_code = part_row[3]#what is this column numbers and letters? Just Numbers
+          @excel.CoreCharge = part_row[16]
+          @excel.ForSale = part_row[17].to_s
+          @excel.OnlineStore = part_row[18].to_s
+          @excel.IsActive = part_row[19].to_s
 
-              # #pulls out the Unit Price of the item
-              # #(needs to be a decimal)
-              # @excel.price = part_row[4]
-
-              # #pulls out the Last purchase cost
-              # #(needs to be a decimal)
-              # @excel.LastPurchasecost = part_row[5]
-
-              # #pulls out the product length (in)
-              # #(needs to be a decimal)
-              # @excel.Productlength = part_row[6]
-
-              # #pulls out the product width (in)
-              # #(needs to be a decimal)
-              # @excel.Productwidth = part_row[7].to_s
-
-              # #pulls out the product height (in)
-              # #(needs to be a decimal)
-              # @excel.Productheight = part_row[8].to_s
-
-              # #pulls out the product weight
-              # #(needs to be a decimal)
-              # @excel.Productweight = part_row[9].to_s
-
-              # #Remarks
-              # #(needs to be a string)
-              # #In my opinion this needs to be removed from the table
-              # remarks = part_row[10].to_s
-
-              # #application
-              # #(needs to be a string)
-              # @excel.Application = part_row[11].to_s
-
-              # #Location
-              # #(needs to be a string)
-              # @excel.Location = part_row[12].to_s
-
-              # #Condition 
-              # #(needs to be a string)
-              # condition = part_row[13].to_s
-
-              # #Cross Reference
-              # #(needs to be a string)
-              # @excel.CrossReference = part_row[14].to_s
-
-              # #Casting number
-              # #(needs to be an integer)
-              # @excel.CastingNum = part_row[15]
-              # unless @excel.CastingNum.nil?
-              #   @excel.CastingNum = @excel.CastingNum.to_int
-              # end
-
-              # #Core Charge
-              # #(needs to be a decimal)
-              # @excel.CoreCharge = part_row[16]
-
-              # #For sale (date in which it is for sale)
-              # #(needs to be a string)
-              # @excel.ForSale = part_row[17].to_s
-
-              # #Online store
-              # #(needs to be a string for now)
-              # #I may request this to be removed it seems to be redundant at this point
-              # @excel.OnlineStore = part_row[18].to_s
-
-              # #IsActive
-              # #(needs to be a string for now)
-              # @excel.IsActive = part_row[19].to_s
-
-              # #Item
-              # #I believe I would like this to be removed
-              # item = part_row[20].to_s
-
-              # #location-duplicate with column [17] above.
-              # #(needs to be a string)
-              # loc = part_row[21].to_s
-
-              # #Sublocation
-              # #(needs to be a string)
-              # @excel.Sublocation= part_row[22].to_s
-
-              # #Quantity
-              # #(needs to be an integer)
-              # @excel.Quantity = part_row[23]
-              # unless @excel.Quantity.nil?
-              #   @excel.Quantity = @excel.Quantity.to_int
-              # end
-
-              # if @excel.save
-              #   redirect_to admin_products_excel_index_url
-              # end
-        #else
-              excel_row = 0
-              part.each 1 do |row|
-                excel_row += 1
-                #Does the excel database entry need to include a spreadsheet entry each time or can the create be done with out the need for the spreadsheet column?
-                if excel_row > 1
-                  @excel = Excel.create(name:"Multiple part upload",parse_errors: nil)
-                end 
-
-                @excel.part_num = row[0].to_i.to_s
-                @excel.description = row[2].to_s
-                @excel.price = row[4]
-                @excel.LastPurchasecost = row[5]
-                @excel.Productlength = row[6]
-                @excel.Productwidth = part_row[7].to_s
-                @excel.Productheight = part_row[8].to_s
-                @excel.Productweight = part_row[9].to_s
-                @excel.Application = part_row[11].to_s
-                @excel.Location = part_row[12].to_s
-                @excel.CrossReference = part_row[14].to_s
-
-                @excel.CastingNum = part_row[15]
-                unless @excel.CastingNum.nil?
-                  @excel.CastingNum = @excel.CastingNum.to_int
-                end
-
-                @excel.CoreCharge = part_row[16]
-                @excel.ForSale = part_row[17].to_s
-                @excel.OnlineStore = part_row[18].to_s
-                @excel.IsActive = part_row[19].to_s
-
-                @excel.Quantity = part_row[23]
-                unless @excel.Quantity.nil?
-                  @excel.Quantity = @excel.Quantity.to_int
-                end
+          @excel.Quantity = part_row[23]
+          unless @excel.Quantity.nil?
+            @excel.Quantity = @excel.Quantity.to_int
+          end
 
 
-                if @excel.save
-                  flash[:success] = "All parts sucessfully uploaded!"
-                end
-              end
-        #end
+          if @excel.save
+            flash[:success] = "All parts sucessfully uploaded!"
+          end
+        end
         redirect_to admin_products_excel_index_url
       end
 
