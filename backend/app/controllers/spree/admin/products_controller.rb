@@ -149,9 +149,36 @@ module Spree
                   @excel = Excel.create(name:"Multiple part upload",parse_errors: nil)
                 end 
 
-                @excel.part_num = row[0]
+                @excel.part_num = row[0].to_i.to_s
+                @excel.description = row[2].to_s
+                @excel.price = row[4]
+                @excel.LastPurchasecost = row[5]
+                @excel.Productlength = row[6]
+                @excel.Productwidth = part_row[7].to_s
+                @excel.Productheight = part_row[8].to_s
+                @excel.Productweight = part_row[9].to_s
+                @excel.Application = part_row[11].to_s
+                @excel.Location = part_row[12].to_s
+                @excel.CrossReference = part_row[14].to_s
+
+                @excel.CastingNum = part_row[15]
+                unless @excel.CastingNum.nil?
+                  @excel.CastingNum = @excel.CastingNum.to_int
+                end
+
+                @excel.CoreCharge = part_row[16]
+                @excel.ForSale = part_row[17].to_s
+                @excel.OnlineStore = part_row[18].to_s
+                @excel.IsActive = part_row[19].to_s
+
+                @excel.Quantity = part_row[23]
+                unless @excel.Quantity.nil?
+                  @excel.Quantity = @excel.Quantity.to_int
+                end
+
+
                 if @excel.save
-                  flash[:success] = @excel.name#"Excel Sheet saved, now need to work on saving multiple excel rows to seperate database rows"
+                  flash[:success] = "All parts sucessfully uploaded!"
                 end
               end
         end
