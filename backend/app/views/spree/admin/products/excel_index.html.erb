@@ -71,13 +71,13 @@
 
           <tr>
             <td>
-              <%= f.field_container :Quantity, :class => ['form-group'] do %>
+              <%= f.field_container :name, :class => ['form-group'] do %>
               <%= f.collection_select(:Quantity,@excel,:part_num,:Quantity) %>
               <%= f.error_message_on :Quantity %>
               <% end %>
             </td>
             <td>
-          <%= f.field_container :Productwidth, :class => ['form-group'] do %>
+          <%= f.field_container :sku, :class => ['form-group'] do %>
           <%= f.collection_select(:Productwidth, @excel,:part_num,:Productwidth) %>
           <%= f.error_message_on :Productwidth %>
           <% end %>
