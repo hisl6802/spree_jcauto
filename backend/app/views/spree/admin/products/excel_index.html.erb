@@ -73,10 +73,10 @@
             <td>
               <%= f.field_container :price, :class => ['form-group'] do %>
               <%= f.collection_select(:price,@excel,:part_num,:price) %>
-              <%= f.error_message_on :price =>
+              <%= f.error_message_on :price %>
               <% end %>
             </td>
-            
+
           </tr>
       		<div data-hook="product-from-prototype" id="product-from-prototype">
       		<%= render :file => 'spree/admin/prototypes/show' if @prototype %>
