@@ -40,14 +40,14 @@
 
           <td>
       		<%= f.field_container :description, :class => ['form-group'] do %>
-      		<%= f.collection_select(:description,@excel,:part_num,:description)%>
+      		<%= f.collection_select(:description,@excel,:description,:description)%>
       		<%= f.error_message_on :description %>
       		<% end %>
       		</td>
 
           <td>
         	<%= f.field_container :price, :class => ['form-group'] do %>
-            <%= f.collection_select(:price,@excel,:part_num,:price) %>
+            <%= f.collection_select(:price,@excel,:price,:price) %>
           	<%= f.error_message_on :price %>
         	<% end %>
       	   </td>
@@ -73,20 +73,20 @@
           <tr>
             <td>
               <%= f.field_container :height, :class => ['form-group'] do %>
-              <%= f.collection_select(:height,@excel,:part_num,:Productheight) %>
+              <%= f.collection_select(:height,@excel,:Productwidth,:Productheight) %>
               <%= f.error_message_on :height %>
               <% end %>
             </td>
             <td>
           <%= f.field_container :width, :class => ['form-group'] do %>
-          <%= f.collection_select(:width, @excel,:part_num,:Productwidth) %>
+          <%= f.collection_select(:width, @excel,:Productwidth,:Productwidth) %>
           <%= f.error_message_on :width %>
           <% end %>
           </td>
           
           <td>
           <%= f.field_container :depth, :class => ['form-group'] do %>
-          <%= f.collection_select(:depth,@excel,:part_num,:Productlength) %>
+          <%= f.collection_select(:depth,@excel,:Productlength,:Productlength) %>
           <%= f.error_message_on :depth %>
           <% end %>
           </td>
