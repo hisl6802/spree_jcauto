@@ -47,7 +47,7 @@
 
           <td>
         	<%= f.field_container :price, :class => ['form-group'] do %>
-            <%= f.collection_select(:price,@excel,:price,:price) %>
+            <%= f.collection_select(:price,@excel,:part_num,:price) %>
           	<%= f.error_message_on :price %>
         	<% end %>
       	   </td>
