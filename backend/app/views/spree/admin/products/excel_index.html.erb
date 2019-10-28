@@ -72,8 +72,8 @@
           <tr>
             <td>
               <%= f.field_container :name, :class => ['form-group'] do %>
-              <%= f.collection_select(:Quantity,@excel,:part_num,:Quantity) %>
-              <%= f.error_message_on :Quantity %>
+              <%= f.collection_select(:quantity,@excel,:part_num,:quantity) %>
+              <%= f.error_message_on :quantity %>
               <% end %>
             </td>
             <td>
