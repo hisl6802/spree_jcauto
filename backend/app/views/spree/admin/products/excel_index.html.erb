@@ -72,21 +72,21 @@
           <tr>
             <td>
               <%= f.field_container :height, :class => ['form-group'] do %>
-              <%= f.collection_select(:height,@excel,:part_num,:height) %>
+              <%= f.collection_select(:height,@excel,:part_num,:Productheight) %>
               <%= f.error_message_on :height %>
               <% end %>
             </td>
             <td>
           <%= f.field_container :width, :class => ['form-group'] do %>
-          <%= f.collection_select(:width, @excel,:part_num,:width) %>
+          <%= f.collection_select(:width, @excel,:part_num,:Productwidth) %>
           <%= f.error_message_on :width %>
           <% end %>
           </td>
           
           <td>
           <%= f.field_container :length, :class => ['form-group'] do %>
-          <%= f.text_field :available_on, :class => 'datepicker form-control' %>
-          <%= f.error_message_on :available_on %>
+          <%= f.collection_select(:length,@excel,:part_num,:Productlength) %>
+          <%= f.error_message_on :length %>
           <% end %>
           </td>
 
