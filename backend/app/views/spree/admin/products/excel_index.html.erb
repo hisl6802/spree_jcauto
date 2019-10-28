@@ -71,7 +71,7 @@
 
           <tr>
             <td>
-              <%= f.field_container :name, :class => ['form-group'] do %>
+              <%= f.field_container :height, :class => ['form-group'] do %>
               <%= f.collection_select(:height,@excel,:part_num,:height) %>
               <%= f.error_message_on :height %>
               <% end %>
