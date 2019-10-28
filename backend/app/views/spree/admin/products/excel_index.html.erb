@@ -40,7 +40,7 @@
 
           <td>
       		<%= f.field_container :description, :class => ['form-group'] do %>
-      		<%= f.collection_select(:description,@excel,:description,:description)%>
+      		<%= f.collection_select(:description,@excel,:part_num,:description)%>
       		<%= f.error_message_on :description %>
       		<% end %>
       		</td>
