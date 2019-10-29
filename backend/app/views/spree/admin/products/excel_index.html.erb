@@ -79,14 +79,14 @@
             </td>
             <td>
           <%= f.field_container :width, :class => ['form-group'] do %>
-          <%= f.collection_select(:width, @excel,:Productwidth,:Productwidth) %>
+          <%= f.text_field :width %>
           <%= f.error_message_on :width %>
           <% end %>
           </td>
           
           <td>
           <%= f.field_container :depth, :class => ['form-group'] do %>
-          <%= f.collection_select(:depth,@excel,:Productlength,:Productlength) %>
+          <%= f.text_field :depth %>
           <%= f.error_message_on :depth %>
           <% end %>
           </td>
