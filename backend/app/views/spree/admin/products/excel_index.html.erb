@@ -92,7 +92,7 @@
           </td>
 
           <td>
-            <% f.field_container :count_on_hand => ['form-group'] do %>
+            <% f.field_container :count_on_hand, :class => ['form-group'] do %>
             <%= f.text_field :count_on_hand %>
             <%= f.error_message_on :count_on_hand %>
             <%end%>
