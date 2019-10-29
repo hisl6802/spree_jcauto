@@ -92,6 +92,9 @@
           </td>
 
           <td>
+            <% f.field_container :count_on_hand => ['form-group'] do %>
+            <%= f.text field :count_on_hand %>
+            <%= f.error_message_on :count_on_hand %>
           </td>
 
           <td>
