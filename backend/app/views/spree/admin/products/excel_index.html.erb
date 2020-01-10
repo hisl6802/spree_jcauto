@@ -20,13 +20,13 @@
 
           <td>
     			<%= f.field_container :name, :class => ['form-group'] do %>
-     			<%= f.collection_select(:name, @excel,:part_num,:part_num) %>
+     			<%= f.collection_select(:name, @excel,:part_num,:part_num,{:include_blank => "Part #"},{class: "form-control"}) %>
      			<%= f.error_message_on :name %>
      			<% end %></td>
 
           <td>
      			<%= f.field_container :sku, :class => ['form-group'] do %>
-     			<%= f.collection_select(:sku, @excel,:part_num,:part_num,{:include_blank => 'Part Numbers'},{class: "form-control"}) %>
+     			<%= f.collection_select(:sku, @excel,:part_num,:part_num,{:include_blank => 'sku'},{class: "form-control"}) %>
      			<%= f.error_message_on :sku %>
      			<% end %>
           </td>
@@ -40,7 +40,7 @@
 
           <td>
       		<%= f.field_container :description, :class => ['form-group'] do %>
-      		<%= f.collection_select(:description,@excel,:description,:description)%>
+      		<%= f.collection_select(:description,@excel,:description,:description,{:include_blank "Description"},class: "form-control")%>
       		<%= f.error_message_on :description %>
       		<% end %>
       		</td>
