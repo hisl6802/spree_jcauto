@@ -91,20 +91,6 @@
           <% end %>
           </td>
 
-          <td>
-          </td>
-
-          <td>
-          </td>
-
-          <td>
-            
-          </td>
-
-          <td>
-
-          </td>
-
           </tr>
       		<div data-hook="product-from-prototype" id="product-from-prototype">
       		<%= render :file => 'spree/admin/prototypes/show' if @prototype %>
@@ -116,3 +102,23 @@
     </div>
   </div>
 </div>
+
+
+
+<script type="text/javascript">
+  $( document ).ready(function(){
+    fixSelections();
+  });
+
+  $("#q_name").change( function(){
+    fixSelections();
+  });
+
+  // change selections based on part Number selected
+  function fixSelections() {
+    $("select[name='q[name]']").each( function(){
+      var name = $("#q_name option:selected");
+      var sku = $(this).parent().siblings("sku").html().split(" ");
+    });
+  }
+</script>
