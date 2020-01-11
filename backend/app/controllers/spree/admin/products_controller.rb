@@ -85,6 +85,14 @@ module Spree
         @product = Product.new
       end
 
+      def excel_destroy
+        @excel = Excel.find(params[:id])
+        @excel.destroy
+
+        flash[:success] = 'Product deleted from Excel index!'
+
+        redirect_to admin_products_excel_index_url
+
       def update
         if params[:product][:taxon_ids].present?
           params[:product][:taxon_ids] = params[:product][:taxon_ids].split(',')
