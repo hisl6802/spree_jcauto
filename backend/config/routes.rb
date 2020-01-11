@@ -21,7 +21,7 @@ Spree::Core::Engine.add_routes do
     get '/products/upload_product_excel', to: "products#upload"
     post '/products/upload_product_excel',to: "products#upload_product_excel"
     get '/products/excel_index', to: "products#excel_index"
-    delete '/products/excel_index/:id', to: "products#excel_destroy" 
+   # delete '/products/excel_index/:id', to: "products#excel_destroy"
     resources :products do
       resources :product_properties do
         collection do
