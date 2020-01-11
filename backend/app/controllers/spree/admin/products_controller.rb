@@ -92,6 +92,7 @@ module Spree
         flash[:success] = 'Product deleted from Excel index!'
 
         redirect_to admin_products_excel_index_url
+      end
 
       def update
         if params[:product][:taxon_ids].present?
