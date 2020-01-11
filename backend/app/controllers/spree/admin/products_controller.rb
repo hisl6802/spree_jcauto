@@ -82,6 +82,10 @@ module Spree
 
       def excel_index
         @excels = Excel.all
+        flash[:success] = @excels
+        #@excels.each do |excel| 
+
+
         @product = Product.new
       end
 
