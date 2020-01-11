@@ -83,7 +83,7 @@ module Spree
       def excel_index
         @excels = Excel.all
         @excels.each do |key, value|
-          flash[:success] = key +":" + value
+          flash[:success] = value.to_s
           end 
 
 
