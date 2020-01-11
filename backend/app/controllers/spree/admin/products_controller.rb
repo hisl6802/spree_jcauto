@@ -82,7 +82,7 @@ module Spree
 
       def excel_index
         @excels = Excel.all
-        flash[:success] = @excels
+        flash[:success] = @excels.part_num
         #@excels.each do |excel| 
 
 
