@@ -84,9 +84,7 @@ module Spree
         @excels = Excel.all
         @excels.each do |key, value|
             flash[:success] = @excel.to_s
-        end
-        end
-
+          end
 
         @product = Product.new
       end
